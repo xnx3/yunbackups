@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.xnx3.yunbackups</groupId>
+	<artifactId>yunbackups.client</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+
+	<name>yunbackups</name>
+	<description>yunbackups</description>
+	<url>https://github.com/xnx3/xnx3_weixin</url>
+
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		
+		<!-- 添加 xnx3-util 支持 -->
+		<dependency>
+		  <groupId>com.xnx3.util</groupId>
+		  <artifactId>xnx3-util</artifactId>
+		  <version>1.0.0</version>
+		</dependency>
+	
+		<dependency>
+		  <groupId>com.xnx3.swing</groupId>
+		  <artifactId>xnx3-swing</artifactId>
+		  <version>1.0</version>
+		</dependency>
+	
+		<dependency>
+		  <groupId>com.xnx3.json</groupId>
+		  <artifactId>json</artifactId>
+		  <version>1.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.java.net.substance</groupId>
+		    <artifactId>substance</artifactId>
+		    <version>5.3</version>
+		</dependency>
+                        
+		<dependency>
+			<groupId>com.huaweicloud</groupId>
+			<artifactId>esdk-obs-java</artifactId>
+			<version>3.19.5</version>
+		</dependency>                     
+                                    
+    </dependencies>
+
+<build>
+		<plugins>
+			<!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<classesDirectory>target/classes/</classesDirectory>
+					<archive>
+						<manifest>
+							<!-- 主函数的入口 -->
+							<mainClass>com.xnx3.yunbackups.YunClientEntry</mainClass>
+							<!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
+							<useUniqueVersions>false</useUniqueVersions>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+						<manifestEntries>
+							<Class-Path>.</Class-Path>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<type>jar</type>
+							<includeTypes>jar</includeTypes>
+							<useUniqueVersions>false</useUniqueVersions>
+							<outputDirectory>
+								${project.build.directory}/lib
+							</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		
+		<resources>  
+            <!-- 打包时将本地jar拷贝到打成jar运行包的BOOT-INF/lib/目录下-->  
+            <resource>  
+                <!-- 指定resources插件处理哪个目录下的资源文件 -->  
+                <directory>lib</directory>  
+                <!--注意此次必须要放在此目录下才能被访问到-->  
+                <targetPath>lib</targetPath>  
+                <includes>  
+                    <include>**/*.jar</include>  
+                </includes>  
+            </resource> 
+           
+        </resources>  
+		
+	</build>
+
+</project>
