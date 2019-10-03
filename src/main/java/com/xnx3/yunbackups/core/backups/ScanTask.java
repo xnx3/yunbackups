@@ -131,13 +131,29 @@ public class ScanTask {
 			}
 		});
 		
+		//排序完成时间记录
+		this.sortFinishTime = DateUtil.timeForUnix13();
+		
 		//排序完成监听
 		if(this.listener != null){
 			this.listener.sortFinish(this);
 		}
 	}
 	
-	public void findSubFileList(File file){
+	/**
+	 * 扫描用户自定义要备份的目录下，有多少可备份文件
+	 */
+	public void scanFiles(){
+		this.startTime = DateUtil.timeForUnix13();
+		findSubFileList(new File(this.backupsPath.getPath()));
+		this.scanFinishTime = DateUtil.timeForUnix13();
+	}
+	
+	/**
+	 * 传入一个文件夹，扫描这个文件夹内的所有文件（及文件夹）列表
+	 * @param file 要扫描的文件夹
+	 */
+	private void findSubFileList(File file){
 		if(file == null){
 			return;
 		}
@@ -222,39 +238,11 @@ public class ScanTask {
 				findSubFileList(subFiles[i]);
 			}
 		}
-		
-		//扫描完成监听
-		if(this.listener != null){
-			this.listener.scanFinish(this);
-		}
 	}
 	
-	
-	public static void main(String[] args) {
-//		
-//		HuaweiyunOBSMode storate = new HuaweiyunOBSMode();
-//		
-//		new Thread(new Runnable() {
-//			public void run() {
-//				while (true) {
-//		            try {
-//						Thread.sleep(100);
-//					} catch (InterruptedException e) {
-//					}
-//		            System.out.println(CPUMonitorCalc.getInstance().getProcessCpu());
-//		        }
-//			}
-//		}).start();
-//		
-//		Backups back = new Backups(1529636694000l);
-//		//列出所有子文件
-//		back.findSubFileList(new File("/Users/apple/Downloads/"));
-//		back.sort();
-//		System.out.println(back.subList.size());
-//		for (int i = 0; i < back.subList.size() && i < 10; i++) {
-//			System.out.println(back.subList.get(i).getPath()+"    "+back.subList.get(i).length());
-////			storate.put(back.subList.get(i).getPath(), back.subList.get(i));
-//		}
-//		
+	public String toString() {
+		return "ScanTask [listener=" + listener + ", backupsPath=" + backupsPath + ", allFileNumber=" + allFileNumber
+				+ ", scanAccordNumber=" + scanAccordNumber + ", startTime=" + startTime + ", scanFinishTime="
+				+ scanFinishTime + ", sortFinishTime=" + sortFinishTime + "]";
 	}
 }

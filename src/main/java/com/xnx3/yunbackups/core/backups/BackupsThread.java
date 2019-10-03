@@ -31,14 +31,23 @@ public class BackupsThread extends Thread{
 				com.xnx3.yunbackups.core.bean.BackupsPath backupsPath = entry.getValue();
 				ScanTask scanTask = new ScanTask(backupsPath);
 				scanTask.setProgressListener(this.listener);	//设定监听
-				//列出所有子文件
-				scanTask.findSubFileList(new File(backupsPath.getPath()));
+				//扫描用户自定义要备份的目录下，有多少可备份文件
+				scanTask.scanFiles();
+				//扫描完成监听
+				if(this.listener != null){
+					this.listener.scanFinish(scanTask);
+				}
 				scanTask.sort();
 				
-				int listSize = scanTask.getSubFileList().size()-1;
+				int listSize = scanTask.getSubFileList().size();
 				for (int i = 0; i < listSize; i++) {
 					//吧应该备份的文件筛选出来
 					File file = scanTask.getSubFileList().get(i);
+					if(!file.exists()){
+						//备份时，再判断一下文件是否存在。有这种情况，扫描时，文件可能是一个临时缓存，加入进了备份列表，但是回头备份时，临时缓存自动删除了，所以就存在文件为空的情况
+						//文件如果不存在，那么继续下个文件的备份
+						continue;
+					}
 					// 备份实现
 					if(storage != null){
 						storage.backups(file);
