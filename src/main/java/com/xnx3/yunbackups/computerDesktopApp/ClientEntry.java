@@ -25,6 +25,7 @@ public class ClientEntry {
 		JDialog.setDefaultLookAndFeelDecorated(true);
 		SwingUtilities.invokeLater(new Runnable() { 
 			public void run() {
+				
 				try{
 					SubstanceLookAndFeel.setSkin(new NebulaSkin());
 				}catch(Exception e){
@@ -44,9 +45,8 @@ public class ClientEntry {
 			}
 		});
 
-		
 		//运行辅助线程-自动同步当前备份进度
-		//new BackupsPathSynchronizationThread().start();
+		new BackupsPathSynchronizationThread().start();
 		
 	}
 	

@@ -19,6 +19,7 @@ public class BackupsThread extends Thread{
 	public BackupsThread(StorageInterface storage, ProgressListener progressListener) {
 		this.storage = storage;
 		this.listener = progressListener;
+		setName("backupsThread");
 	}
 	
 	public void run() {

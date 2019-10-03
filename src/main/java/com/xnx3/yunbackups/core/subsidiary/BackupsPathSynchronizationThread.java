@@ -9,6 +9,10 @@ import com.xnx3.yunbackups.core.config.BackupsPath;
  *
  */
 public class BackupsPathSynchronizationThread extends Thread{
+	public BackupsPathSynchronizationThread() {
+		setName("backupsPathSynchronizationThread");
+	}
+	
 	public void run() {
 		while(true){
 			BackupsPath.save(Global.backupsPathMap);

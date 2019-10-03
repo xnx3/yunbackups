@@ -113,17 +113,17 @@ public class ScanTask {
 				}
 				long diff = file1.lastModified() - file2.lastModified();
 				if (diff > 0) {
-					return -1;
-				}else if (diff < 0) {
 					return 1;
+				}else if (diff < 0) {
+					return -1;
 				}
 				
 				//如果等于0，那就在比较文件大小吧，小文件排前面
 				long lengthDiff = file1.length() - file2.length();
 				if(lengthDiff > 0){
-					return -1;
-				}else if(lengthDiff < 0){
 					return 1;
+				}else if(lengthDiff < 0){
+					return -1;
 				}
 				
 				//如果前两个都一样，那么最后只能判断文件路径了
