@@ -3,6 +3,7 @@ package com.xnx3.yunbackups.computerDesktopApp;
 import java.io.File;
 
 import com.xnx3.DateUtil;
+import com.xnx3.Lang;
 import com.xnx3.exception.NotReturnValueException;
 import com.xnx3.yunbackups.core.backups.ScanTask;
 
@@ -12,6 +13,7 @@ import com.xnx3.yunbackups.core.backups.ScanTask;
  *
  */
 public class ProgressListener implements com.xnx3.yunbackups.core.backups.interfaces.ProgressListener{
+	
 	public void scanAccordFile(ScanTask scanTask, File file) {
 		// TODO Auto-generated method stub
 		
@@ -39,7 +41,12 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 	}
 
 	public void backupsOneFileFinish(ScanTask scanTask, File file, int currentRankNumber) {
-		Global.logJPanel.currentBackupsFilePathLabel.setText("<html>"+file.getPath());
+//		try {
+//			Global.logJPanel.currentBackupsFilePathLabel.setText("<html>"+file.getPath());
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//			e.printStackTrace();
+//		}
 		try {
 			System.out.println("--"+file.getPath()+"   "+DateUtil.dateFormat(file.lastModified(), "yyyy-MM-dd hh:mm:ss"));
 		} catch (NotReturnValueException e) {

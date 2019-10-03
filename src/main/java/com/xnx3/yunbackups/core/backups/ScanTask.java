@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import com.xnx3.DateUtil;
+import com.xnx3.MD5Util;
 import com.xnx3.yunbackups.core.Global;
 import com.xnx3.yunbackups.core.backups.interfaces.ProgressListener;
 import com.xnx3.yunbackups.core.bean.BackupsPath;
@@ -22,9 +23,9 @@ public class ScanTask {
 	private int allFileNumber = 0;	//当前目录下所有文件的数量
 	private int scanAccordNumber = 0;	//扫描到的符合条件的，需要进行备份的文件数量
 	
-	private long startTime = DateUtil.timeForUnix13();	//这个开始扫描的时间，也就是当前backups开始执行的时间，13位linux时间戳
-	private long scanFinishTime = DateUtil.timeForUnix13();	// 搜索扫描子文件完成的时间。接下来就是进行文件排序，也就是文件排序开始的时间
-	private long sortFinishTime = DateUtil.timeForUnix13();	// 文件排序完成的时间
+	private long startTime = 0;	//这个开始扫描的时间，也就是当前backups开始执行的时间，13位linux时间戳
+	private long scanFinishTime = 0;	// 搜索扫描子文件完成的时间。接下来就是进行文件排序，也就是文件排序开始的时间
+	private long sortFinishTime = 0;	// 文件排序完成的时间
 	
 	//组合好的子文件列表，不包含文件夹，只是 file 的子文件
 	private List<File> subFileList = new ArrayList<File>();
@@ -104,7 +105,7 @@ public class ScanTask {
 	/**
 	 * 对 sublist进行排序，最新修改的在最前面
 	 */
-	public void sort(){
+	protected void sort(){
 		//排序，筛选出最近修改的文件
 		Collections.sort(subFileList, new Comparator<File>() {
 			public int compare(File file1, File file2) {
@@ -126,8 +127,17 @@ public class ScanTask {
 					return -1;
 				}
 				
-				//如果前两个都一样，那么最后只能判断文件路径了
-				return file1.getPath().compareTo(file2.getPath());
+				//如果还判断出来，就判断文件名字
+				int fileNameDiff = file1.getPath().compareTo(file2.getPath());
+				if(fileNameDiff != 0){
+					return fileNameDiff;
+				}
+				
+				//前面的还是都一样，那就只能是判断绝对路径了
+				System.out.println("===========sort------");
+				System.out.println(file1.getPath());
+				System.out.println(file2.getPath());
+				return MD5Util.MD5(file1.getPath()).compareTo(MD5Util.MD5(file2.getPath()));
 			}
 		});
 		
@@ -143,7 +153,7 @@ public class ScanTask {
 	/**
 	 * 扫描用户自定义要备份的目录下，有多少可备份文件
 	 */
-	public void scanFiles(){
+	protected void scanFiles(){
 		this.startTime = DateUtil.timeForUnix13();
 		findSubFileList(new File(this.backupsPath.getPath()));
 		this.scanFinishTime = DateUtil.timeForUnix13();
@@ -153,7 +163,7 @@ public class ScanTask {
 	 * 传入一个文件夹，扫描这个文件夹内的所有文件（及文件夹）列表
 	 * @param file 要扫描的文件夹
 	 */
-	private void findSubFileList(File file){
+	protected void findSubFileList(File file){
 		if(file == null){
 			return;
 		}

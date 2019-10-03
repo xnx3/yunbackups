@@ -1,6 +1,8 @@
 package com.xnx3.yunbackups.defaultStorage;
 
 import java.io.File;
+import java.net.UnknownHostException;
+
 import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.defaultStorage.huawei.OBSHandler;
@@ -54,8 +56,19 @@ public class HuaweiyunOBS implements StorageInterface{
 		return path;
 	} 
 	
-	public void backups(File file) {
-		getObsHander().putLocalFile(obsBucketName, getSavePath(file), file);
+	
+	public void backups (File file) throws java.net.UnknownHostException, java.lang.IllegalArgumentException{
+		try {
+			getObsHander().putLocalFile(obsBucketName, getSavePath(file), file);
+		}catch (com.obs.services.exception.ObsException obsE){
+			String eStr = obsE.getCause().toString().toLowerCase();
+			if(eStr.indexOf("java.net.unknownhostexception") > -1){
+				throw new java.net.UnknownHostException();
+			}else{
+				obsE.printStackTrace();
+			}
+		}
+		
 	}
 
 	
