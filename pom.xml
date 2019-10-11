@@ -63,7 +63,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 					<archive>
 						<manifest>
 							<!-- 主函数的入口 -->
-							<mainClass>com.xnx3.yunbackups.YunClientEntry</mainClass>
+							<mainClass>com.xnx3.yunbackups.computerDesktopApp.ClientEntry</mainClass>
 							<!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
 							<useUniqueVersions>false</useUniqueVersions>
 							<addClasspath>true</addClasspath>

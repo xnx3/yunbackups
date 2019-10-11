@@ -6,8 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.NebulaSkin;
+
+import com.xnx3.yunbackups.computerDesktopApp.config.CloudConfig;
 import com.xnx3.yunbackups.computerDesktopApp.ui.MainJFrame;
+import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.FileManageJPanel;
+import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.HuaWeiConfigJPanel;
 import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.LogJPanel;
+import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.SystemJPanel;
 import com.xnx3.yunbackups.core.backups.BackupsThread;
 import com.xnx3.yunbackups.core.subsidiary.BackupsPathSynchronizationThread;
 import com.xnx3.yunbackups.defaultStorage.HuaweiyunOBS;
@@ -31,16 +36,18 @@ public class ClientEntry {
 				}catch(Exception e){
 					e.printStackTrace();
 				}
+				Global.logJPanel = new LogJPanel();
+				
 				MainJFrame frame = new MainJFrame();
 				frame.setSize(1000, 600);
-				Global.logJPanel = new LogJPanel();
+				frame.tabbedPane.addTab("系统参数", new SystemJPanel());
+				frame.tabbedPane.addTab("备份目录", new FileManageJPanel());
+				frame.tabbedPane.addTab("华为云配置", new HuaWeiConfigJPanel());
+				frame.tabbedPane.addTab("运行状态", Global.logJPanel);
 				frame.setVisible(true);
 				
-				frame.setContentPane(Global.logJPanel);	
-				frame.setVisible(true);
-				
-				//运行自动备份线程，执行备份操作
-				new BackupsThread(new HuaweiyunOBS(),new ProgressListener()).start();
+				//加载云端配置参数
+				Global.cloudConfigBean = CloudConfig.read();
 				
 			}
 		});

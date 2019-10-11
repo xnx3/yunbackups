@@ -47,11 +47,11 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 //			System.out.println(e.getMessage());
 //			e.printStackTrace();
 //		}
-		try {
-			System.out.println("--"+file.getPath()+"   "+DateUtil.dateFormat(file.lastModified(), "yyyy-MM-dd hh:mm:ss"));
-		} catch (NotReturnValueException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			System.out.println("--"+file.getPath()+"   "+DateUtil.dateFormat(file.lastModified(), "yyyy-MM-dd hh:mm:ss"));
+//		} catch (NotReturnValueException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	public void backupsFinish(int allFileNumber, int alreadyScanAccordNumber, long starttime) {

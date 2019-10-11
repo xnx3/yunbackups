@@ -3,6 +3,7 @@ package com.xnx3.yunbackups.defaultStorage;
 import java.io.File;
 import java.net.UnknownHostException;
 
+import com.xnx3.BaseVO;
 import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.defaultStorage.huawei.OBSHandler;
@@ -17,11 +18,25 @@ public class HuaweiyunOBS implements StorageInterface{
 	private static String obsBucketName; // 当前进行操作桶的名称
 	
 	// 创建 accesskeyid 网址 https://console.huaweicloud.com/iam/?region=cn-north-4&locale=zh-cn#/iam/agencies  创建委托 便是
-	public static String accessKeyId = "SRB26OK09GG9O23LUCYG";
-	public static String accessKeySecret = "FnSy0oqrgBWcdCf221kcScD5XBolH038hw7kgIPN";
+	public static String accessKeyId;
+	public static String accessKeySecret;
 	
-	public static String obsEndpoint = "obs.cn-north-1.myhuaweicloud.com";
+	public static String obsEndpoint;	//格式如 obs.cn-north-1.myhuaweicloud.com
 	public static String bucketName = "testbuckup"; 
+	
+	/**
+	 * 创建华为云存储
+	 * @param accessKeyId   https://console.huaweicloud.com/iam/?region=cn-east-2&locale=zh-cn#/iam/users    进入安全设置，新增访问密钥，得到  Access Key Id 、 Secret Access Key
+	 * @param accessKeySecret
+	 * @param obsEndpoint 所属区域
+	 * @param bucketName 桶的名字
+	 */
+	public HuaweiyunOBS(String accessKeyId, String accessKeySecret, String obsEndpoint, String bucketName) {
+		this.accessKeyId = accessKeyId;
+		this.accessKeySecret = accessKeySecret;
+		this.obsEndpoint = obsEndpoint;
+		this.bucketName = bucketName;
+	}
 	
 	/**
 	 * 获取华为云OBS的操作类
@@ -69,6 +84,18 @@ public class HuaweiyunOBS implements StorageInterface{
 			}
 		}
 		
+	}
+
+	public BaseVO isUsable() {
+		BaseVO vo = new BaseVO();
+		
+		/*
+		 * 
+		 * 待判断
+		 * 
+		 */
+		
+		return vo;
 	}
 
 	

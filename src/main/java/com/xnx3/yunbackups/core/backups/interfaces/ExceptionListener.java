@@ -14,4 +14,10 @@ public interface ExceptionListener {
 	 */
 	public int unknownHostException(java.net.UnknownHostException e);
 	
+	/**
+	 * 将文件备份到服务器时，如果服务器通信失败，不可用时，触发此接口
+	 * @param info 当通信失败不可用时，传入的原因，为什么通信失败不可用
+	 */
+	public void serviceDisabled(String info);
+	
 }

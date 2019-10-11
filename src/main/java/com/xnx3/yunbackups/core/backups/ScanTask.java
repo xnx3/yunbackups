@@ -102,13 +102,21 @@ public class ScanTask {
 		this.listener = progressListener;
 	}
 	
+	File files1;
+	File files2;
 	/**
 	 * 对 sublist进行排序，最新修改的在最前面
 	 */
 	protected void sort(){
+		try{
+		
+		
 		//排序，筛选出最近修改的文件
 		Collections.sort(subFileList, new Comparator<File>() {
 			public int compare(File file1, File file2) {
+				files1 = file1;
+				files2 = file2;
+				
 				if(file1 == null || file2 == null){
 					return 0;
 				}
@@ -119,28 +127,41 @@ public class ScanTask {
 					return -1;
 				}
 				
+				//直接返回0，速度提升是进行下面判断的4倍！
+				return 0;
+				
 				//如果等于0，那就在比较文件大小吧，小文件排前面
-				long lengthDiff = file1.length() - file2.length();
-				if(lengthDiff > 0){
-					return 1;
-				}else if(lengthDiff < 0){
-					return -1;
-				}
+//				long lengthDiff = file1.length() - file2.length();
+//				if(lengthDiff > 0){
+//					return 1;
+//				}else if(lengthDiff < 0){
+//					return -1;
+//				}
 				
+//				System.out.println("===========sort------");
+//				System.out.println(file1.getPath());
+//				System.out.println(file2.getPath());
+				
+//				
 				//如果还判断出来，就判断文件名字
-				int fileNameDiff = file1.getPath().compareTo(file2.getPath());
-				if(fileNameDiff != 0){
-					return fileNameDiff;
-				}
-				
-				//前面的还是都一样，那就只能是判断绝对路径了
-				System.out.println("===========sort------");
-				System.out.println(file1.getPath());
-				System.out.println(file2.getPath());
-				return MD5Util.MD5(file1.getPath()).compareTo(MD5Util.MD5(file2.getPath()));
+//				int fileNameDiff = file1.getPath().compareTo(file2.getPath());
+//				if(fileNameDiff != 0){
+//					return fileNameDiff;
+//				}
+//				
+//				//前面的还是都一样，那就只能是判断绝对路径了
+//				System.out.println("===========sort------");
+//				System.out.println(file1.getPath());
+//				System.out.println(file2.getPath());
+//				return MD5Util.MD5(file1.getPath()).compareTo(MD5Util.MD5(file2.getPath()));
 			}
 		});
 		
+		} catch (java.lang.IllegalArgumentException e) {
+			System.out.println("files1: "+files1.getPath());
+			System.out.println("files2: "+files2.getPath());
+			e.printStackTrace();
+		}
 		//排序完成时间记录
 		this.sortFinishTime = DateUtil.timeForUnix13();
 		

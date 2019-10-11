@@ -2,6 +2,8 @@ package com.xnx3.yunbackups.core.backups;
 
 import java.io.File;
 import java.util.Map;
+
+import com.xnx3.BaseVO;
 import com.xnx3.DateUtil;
 import com.xnx3.yunbackups.core.Global;
 import com.xnx3.yunbackups.core.backups.interfaces.ExceptionListener;
@@ -38,6 +40,14 @@ public class BackupsThread extends Thread{
 
 
 	public void run() {
+		//判断通信是否正常
+		BaseVO vo = storage.isUsable();
+		if(vo.getResult() - BaseVO.FAILURE == 0){
+			//通信失败，退出！
+			System.out.println("connect failure ! info : "+vo.getInfo());
+			return;
+		}
+		
 		while(true){
 			int allFileNumber = 0;	//记录本次一共扫描的文件数量，每扫描完都会附加到这里
 			int backupsNumber = 0;	//本次共备份了多少个文件
@@ -54,6 +64,7 @@ public class BackupsThread extends Thread{
 					this.progressListener.scanFinish(scanTask);
 				}
 				scanTask.sort();
+				
 				
 				int listSize = scanTask.getSubFileList().size();
 				for (int i = 0; i < listSize; i++) {
