@@ -1,10 +1,11 @@
-package com.xnx3.yunbackups.computerDesktopApp;
+package com.xnx3.yunbackups.computerDesktopApp.backups;
 
 import java.io.File;
 
 import com.xnx3.DateUtil;
 import com.xnx3.Lang;
 import com.xnx3.exception.NotReturnValueException;
+import com.xnx3.yunbackups.computerDesktopApp.Global;
 import com.xnx3.yunbackups.core.backups.ScanTask;
 
 /**

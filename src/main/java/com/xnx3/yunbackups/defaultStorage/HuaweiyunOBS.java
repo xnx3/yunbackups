@@ -1,8 +1,8 @@
 package com.xnx3.yunbackups.defaultStorage;
 
 import java.io.File;
-import java.net.UnknownHostException;
-
+import java.io.UnsupportedEncodingException;
+import com.obs.services.exception.ObsException;
 import com.xnx3.BaseVO;
 import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
 import com.xnx3.yunbackups.core.util.SystemUtil;
@@ -14,15 +14,13 @@ import com.xnx3.yunbackups.defaultStorage.huawei.OBSHandler;
  *
  */
 public class HuaweiyunOBS implements StorageInterface{
-	private static OBSHandler obsHandler;	//禁用，通过getObsUtil() 获取
-	private static String obsBucketName; // 当前进行操作桶的名称
+	private OBSHandler obsHandler;	//禁用，通过getObsUtil() 获取
 	
 	// 创建 accesskeyid 网址 https://console.huaweicloud.com/iam/?region=cn-north-4&locale=zh-cn#/iam/agencies  创建委托 便是
-	public static String accessKeyId;
-	public static String accessKeySecret;
-	
-	public static String obsEndpoint;	//格式如 obs.cn-north-1.myhuaweicloud.com
-	public static String bucketName = "testbuckup"; 
+	public String accessKeyId;
+	public String accessKeySecret;
+	public String obsEndpoint;	//格式如 obs.cn-north-1.myhuaweicloud.com
+	public String bucketName; 
 	
 	/**
 	 * 创建华为云存储
@@ -43,7 +41,7 @@ public class HuaweiyunOBS implements StorageInterface{
 	 * @author 李鑫
 	 * @return 当前华为云OBS的操作类型
 	 */
-	public static OBSHandler getObsHander() {
+	public OBSHandler getObsHander() {
 		
 		if(obsHandler == null) {
 			obsHandler = new OBSHandler(accessKeyId,accessKeySecret,obsEndpoint);
@@ -52,7 +50,7 @@ public class HuaweiyunOBS implements StorageInterface{
 			// 在数据库中读取进行操作的桶的明恒
 			obsHandler.setObsBucketName(bucketName);
 			// 对桶名称进行当前类内缓存
-			obsBucketName = obsHandler.getObsBucketName();
+			bucketName = obsHandler.getObsBucketName();
 		}
 		return obsHandler;
 	}
@@ -74,7 +72,7 @@ public class HuaweiyunOBS implements StorageInterface{
 	
 	public void backups (File file) throws java.net.UnknownHostException, java.lang.IllegalArgumentException{
 		try {
-			getObsHander().putLocalFile(obsBucketName, getSavePath(file), file);
+			getObsHander().putLocalFile(bucketName, getSavePath(file), file);
 		}catch (com.obs.services.exception.ObsException obsE){
 			String eStr = obsE.getCause().toString().toLowerCase();
 			if(eStr.indexOf("java.net.unknownhostexception") > -1){
@@ -89,11 +87,17 @@ public class HuaweiyunOBS implements StorageInterface{
 	public BaseVO isUsable() {
 		BaseVO vo = new BaseVO();
 		
-		/*
-		 * 
-		 * 待判断
-		 * 
-		 */
+		try {
+			//上传一个对象，看是否能上传成功，从而判断当前storage是否可用。
+			getObsHander().putStringFile(bucketName, "yunbackups/usable.test", "this is test file.", "UTF-8");
+			vo.setBaseVO(BaseVO.SUCCESS, "success");
+		} catch (ObsException e) {
+			vo.setBaseVO(BaseVO.FAILURE, e.getMessage());
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			vo.setBaseVO(BaseVO.FAILURE, e.getMessage());
+			e.printStackTrace();
+		}
 		
 		return vo;
 	}

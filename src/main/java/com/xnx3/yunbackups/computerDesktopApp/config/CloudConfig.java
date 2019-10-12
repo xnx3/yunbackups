@@ -31,7 +31,7 @@ public class CloudConfig {
 	 */
 	public static CloudConfigBean read(){
 		CloudConfigBean bean = new CloudConfigBean();
-		
+		System.out.println(Global.CONFIG_PATH+"cloudConfig.config");
 		String content = FileUtil.read(Global.CONFIG_PATH+"cloudConfig.config");
 		content = StringUtil.utf8ToString(content);
 		if(content == null || content.length() == 0){

@@ -38,13 +38,16 @@ public class BackupsThread extends Thread{
 	}
 
 
-
 	public void run() {
 		//判断通信是否正常
 		BaseVO vo = storage.isUsable();
 		if(vo.getResult() - BaseVO.FAILURE == 0){
 			//通信失败，退出！
-			System.out.println("connect failure ! info : "+vo.getInfo());
+			
+			//异常触发
+			if(this.exceptionListener != null){
+				this.exceptionListener.serviceDisabled(vo.getInfo());
+			}
 			return;
 		}
 		
