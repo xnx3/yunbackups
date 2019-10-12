@@ -7,6 +7,7 @@ import javax.swing.SwingUtilities;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.NebulaSkin;
 
+import com.xnx3.yunbackups.computerDesktopApp.action.CreateTray;
 import com.xnx3.yunbackups.computerDesktopApp.config.CloudConfig;
 import com.xnx3.yunbackups.computerDesktopApp.ui.MainJFrame;
 import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.FileManageJPanel;
@@ -49,6 +50,8 @@ public class ClientEntry {
 				//加载云端配置参数
 				Global.cloudConfigBean = CloudConfig.read();
 				
+				//创建托盘
+				new CreateTray();
 			}
 		});
 

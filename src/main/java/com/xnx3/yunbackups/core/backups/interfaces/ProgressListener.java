@@ -10,6 +10,12 @@ import com.xnx3.yunbackups.core.backups.ScanTask;
 public interface ProgressListener {
 	
 	/**
+	 * 备份开始，跟 {@link #backupsFinish(int, int, long)} 相对。
+	 *  backupsFinish(...) 备份完成后，等待多长时间，便会重新开始备份操作，扫描设定的多个备份目录内，可以进行备份的文件。本接口便是在开始备份，要扫描可备份的文件之前，进行触发
+	 */
+	public void backupsStart();
+	
+	/**
 	 * ScanTask 进行扫描的过程中，当发现一个可备份的文件时，便会触发此方法。
 	 * <br/>用户可以设定多个备份文件夹，一个 backupsPath 便是一个用户设定的备份文件夹。此接口便是其中一个 buckupsPath 进行扫描时的监听
 	 * <br/>每当发下一个可备份文件，都会触发此方法。

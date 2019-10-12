@@ -56,6 +56,10 @@ public class BackupsThread extends Thread{
 			int backupsNumber = 0;	//本次共备份了多少个文件
 			long starttime = DateUtil.timeForUnix13();	//开始时间记录
 			
+			if(this.progressListener != null){
+				this.progressListener.backupsStart();
+			}
+			
 			for(Map.Entry<String, com.xnx3.yunbackups.core.bean.BackupsPath> entry : Global.backupsPathMap.entrySet()){
 				com.xnx3.yunbackups.core.bean.BackupsPath backupsPath = entry.getValue();
 				ScanTask scanTask = new ScanTask(backupsPath);
