@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.xnx3.yunbackups.computerDesktopApp.Global;
+import com.xnx3.yunbackups.computerDesktopApp.action.LogJPanelAction;
 import com.xnx3.yunbackups.computerDesktopApp.backups.ExceptionListener;
 import com.xnx3.yunbackups.computerDesktopApp.backups.ProgressListener;
 import com.xnx3.yunbackups.core.backups.BackupsThread;
@@ -30,7 +31,7 @@ public class LogJPanel extends JPanel {
 	public JLabel scanTimeLabel;
 	public JLabel sortTimeLabel;
 	public JButton runButton;
-	private JLabel statusLabel;
+	public JLabel statusLabel;
 	private JPanel progressPanel;
 	
 	/**
@@ -46,18 +47,7 @@ public class LogJPanel extends JPanel {
 		runButton = new JButton("运行");
 		runButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//运行自动备份线程，执行备份操作
-				HuaweiyunOBS obs = new HuaweiyunOBS(Global.cloudConfigBean.getAccessKeyId(), Global.cloudConfigBean.getSecretAccessKey(), Global.cloudConfigBean.getEndpoint(), Global.cloudConfigBean.getBucketName());
-				BackupsThread backupsThread = new BackupsThread(obs);
-				//进行备份进度的监听。如果不想看到实时进度，此项完全可以省略，还能提升性能
-				backupsThread.setProgressListener(new ProgressListener());
-				//备份过程中遇到的异常监听。比如断网了
-				backupsThread.setExceptionListener(new ExceptionListener());
-				//开始执行此线程，开始备份
-				backupsThread.start();
-				
-				runButton.setVisible(false);
-				statusLabel.setText("扫描中...");
+				LogJPanelAction.clickRunButton();
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -121,11 +111,11 @@ public class LogJPanel extends JPanel {
 								.addComponent(label, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_progressPanel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(currentBackupsPathLabel, GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+								.addComponent(currentBackupsPathLabel, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
 								.addGroup(gl_progressPanel.createSequentialGroup()
 									.addGroup(gl_progressPanel.createParallelGroup(Alignment.TRAILING)
-										.addComponent(alreadyScanAccordNumberLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-										.addComponent(allFileNumberLabel, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
+										.addComponent(alreadyScanAccordNumberLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+										.addComponent(allFileNumberLabel, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(gl_progressPanel.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_progressPanel.createSequentialGroup()
@@ -140,8 +130,8 @@ public class LogJPanel extends JPanel {
 						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_progressPanel.createSequentialGroup()
 							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(currentBackupsFilePathLabel, GroupLayout.PREFERRED_SIZE, 320, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(currentBackupsFilePathLabel, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		gl_progressPanel.setVerticalGroup(
@@ -169,10 +159,10 @@ public class LogJPanel extends JPanel {
 							.addGroup(gl_progressPanel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(sortTimeLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 								.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))))
-					.addPreferredGap(ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
 					.addGroup(gl_progressPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-						.addComponent(currentBackupsFilePathLabel, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+						.addComponent(currentBackupsFilePathLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		progressPanel.setLayout(gl_progressPanel);

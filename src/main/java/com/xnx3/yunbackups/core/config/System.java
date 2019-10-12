@@ -21,7 +21,6 @@ public class System {
 	 */
 	public static void save(com.xnx3.yunbackups.core.bean.System system){
 		JSONObject json = JSONObject.fromObject(system);
-		java.lang.System.out.println(json.toString());
 		FileUtil.write(Global.CONFIG_PATH+"system.config", StringUtil.StringToUtf8(json.toString()));
 	}
 	
@@ -76,7 +75,7 @@ public class System {
 				}
 				
 				if(json.get("hiddenFileScan") != null){
-					system.setHiddenFileScan(JSONUtil.getString(json, "hiddenFileScan").equals("true"));
+					system.setHiddenFileScan(JSONUtil.getString(json, "hiddenFileScan").equalsIgnoreCase("true"));
 				}
 				
 			} catch (Exception e) {
@@ -87,15 +86,5 @@ public class System {
 		return system;
 	}
 	
-	public static void main(String[] args) {
-		
-		com.xnx3.yunbackups.core.bean.System system = new com.xnx3.yunbackups.core.bean.System();
-		system.setIgnoreSuffixNameList(new ArrayList<String>());
-		system.getIgnoreSuffixNameList().add("png");
-		system.getIgnoreSuffixNameList().add("jpg");
-		system.getIgnoreSuffixNameList().add("gif");
-		
-		save(system);
-	}
 	
 }

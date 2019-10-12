@@ -4,7 +4,7 @@ import com.xnx3.yunbackups.core.Global;
 import com.xnx3.yunbackups.core.config.BackupsPath;
 
 /**
- * backupsPath 同步线程，每间隔5秒保存一次
+ * backupsPath 最新备份进度的同步线程，每间隔5秒保存一次，保存当前备份到哪个时间点了
  * @author 管雷鸣
  *
  */
