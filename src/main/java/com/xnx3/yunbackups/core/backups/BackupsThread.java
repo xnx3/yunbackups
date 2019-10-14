@@ -2,7 +2,6 @@ package com.xnx3.yunbackups.core.backups;
 
 import java.io.File;
 import java.util.Map;
-
 import com.xnx3.BaseVO;
 import com.xnx3.DateUtil;
 import com.xnx3.yunbackups.core.Global;
@@ -71,7 +70,6 @@ public class BackupsThread extends Thread{
 					this.progressListener.scanFinish(scanTask);
 				}
 				scanTask.sort();
-				
 				
 				int listSize = scanTask.getSubFileList().size();
 				for (int i = 0; i < listSize; i++) {

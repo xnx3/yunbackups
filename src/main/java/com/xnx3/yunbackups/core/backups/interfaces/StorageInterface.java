@@ -1,8 +1,6 @@
 package com.xnx3.yunbackups.core.backups.interfaces;
 
 import java.io.File;
-import java.net.UnknownHostException;
-
 import com.xnx3.BaseVO;
 
 /**

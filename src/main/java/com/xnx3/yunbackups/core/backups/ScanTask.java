@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import com.xnx3.DateUtil;
-import com.xnx3.MD5Util;
 import com.xnx3.yunbackups.core.Global;
 import com.xnx3.yunbackups.core.backups.interfaces.ProgressListener;
 import com.xnx3.yunbackups.core.bean.BackupsPath;
@@ -129,31 +128,6 @@ public class ScanTask {
 				
 				//直接返回0，速度提升是进行下面判断的4倍！
 				return 0;
-				
-				//如果等于0，那就在比较文件大小吧，小文件排前面
-//				long lengthDiff = file1.length() - file2.length();
-//				if(lengthDiff > 0){
-//					return 1;
-//				}else if(lengthDiff < 0){
-//					return -1;
-//				}
-				
-//				System.out.println("===========sort------");
-//				System.out.println(file1.getPath());
-//				System.out.println(file2.getPath());
-				
-//				
-				//如果还判断出来，就判断文件名字
-//				int fileNameDiff = file1.getPath().compareTo(file2.getPath());
-//				if(fileNameDiff != 0){
-//					return fileNameDiff;
-//				}
-//				
-//				//前面的还是都一样，那就只能是判断绝对路径了
-//				System.out.println("===========sort------");
-//				System.out.println(file1.getPath());
-//				System.out.println(file2.getPath());
-//				return MD5Util.MD5(file1.getPath()).compareTo(MD5Util.MD5(file2.getPath()));
 			}
 		});
 		
