@@ -38,13 +38,14 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 	}
 
 	public void backupsFinish(int allFileNumber, int alreadyScanAccordNumber, long starttime) {
-		long usetime = DateUtil.timeForUnix13() - starttime;	//备份耗时
-		//算出共耗时多少秒
-		int secend = Math.round(usetime / 1000);
 		//更新一备份到哪个文件的ui刷新线程，标记为false，退出循转，结束线程
 		logBackupsOneFileFinishThread.run = false;
+		//备份耗时
+		long usetime = DateUtil.timeForUnix13() - starttime;	
+		//算出共耗时多少秒
+		int secend = Math.round(usetime / 1000);
 		//更新完毕的状态提示文字
-		Global.logJPanel.getStatusLabel().setText("<html>本次自动备份完毕！共备份"+alreadyScanAccordNumber+"个文件，耗时"+secend+"秒。正在等待下一次自动扫描备份...");
+		Global.logJPanel.statusLabel.setText("本次自动备份完毕！共备份"+alreadyScanAccordNumber+"个文件，耗时"+secend+"秒。等待下次扫描备份...");
 		//隐藏备份具体进度信息
 		Global.logJPanel.getProgressPanel().setVisible(false);
 	}

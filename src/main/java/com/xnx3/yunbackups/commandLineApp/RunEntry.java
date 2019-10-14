@@ -23,7 +23,7 @@ public class RunEntry {
 				
 		//判断一下是否设置过备份服务器相关参数，若已经设置了，那么自动运行
 		if(Global.cloudConfigBean.getBucketName() != null && Global.cloudConfigBean.getBucketName().length() > 0){
-			System.out.println("run...");
+			System.out.println("run... ");
 		}else{
 			System.out.println("please set cloud backups params");
 			return;

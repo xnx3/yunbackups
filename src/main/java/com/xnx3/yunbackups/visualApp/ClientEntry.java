@@ -57,6 +57,8 @@ public class ClientEntry {
 			
 		});
 
+		
+		
 		//运行辅助线程-自动同步当前备份进度
 		new BackupsPathSynchronizationThread().start();
 		

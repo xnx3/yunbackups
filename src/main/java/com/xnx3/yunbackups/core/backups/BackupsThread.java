@@ -50,7 +50,8 @@ public class BackupsThread extends Thread{
 			return;
 		}
 		
-		while(true){
+		int i1 = 2;
+		while(i1++ == 2){
 			int allFileNumber = 0;	//记录本次一共扫描的文件数量，每扫描完都会附加到这里
 			int backupsNumber = 0;	//本次共备份了多少个文件
 			long starttime = DateUtil.timeForUnix13();	//开始时间记录
@@ -113,6 +114,7 @@ public class BackupsThread extends Thread{
 				e.printStackTrace();
 			}
 		}
+		
 	}
 	
 	/**

@@ -183,6 +183,15 @@ public class ScanTask {
 				}
 			}
 			
+			//时间判断，当前文件是否时间点比较新的文件，可备份的
+			if(subFiles[i].lastModified() - this.backupsPath.getLasttime() - 1 > 0){
+				//如果这里就是上一次某个具体秒数的时间备份了，这次还继续备份一次，也就是最后一次备份的秒数那个时间点备份两次。一秒创建不了多少文件，顶多也就是额外多备份几个文件而已
+				//时间通过，未备份过的新文件，可以进行备份
+			}else{
+				//在lasttime之前的，那么忽略
+				continue;
+			}
+			
 			if(subFiles[i].length() > Global.system.getFileMaxSize()){
 				//文件大小超过设定的最大大小，忽略
 				continue;
@@ -223,13 +232,6 @@ public class ScanTask {
 				}
 			}
 			
-			if(subFiles[i].lastModified() - this.backupsPath.getLasttime() - 1 > 0){
-				//如果这里就是上一次某个具体秒数的时间备份了，这次还继续备份一次，也就是最后一次备份的秒数那个时间点备份两次。一秒创建不了多少文件，顶多也就是额外多备份几个文件而已
-				//时间通过，未备份过的新文件，可以进行备份
-			}else{
-				//在lasttime之前的，那么忽略
-				continue;
-			}
 			
 			if(subFiles[i].isFile()){
 				//如果是文件，那么直接加入返回列表
