@@ -1,4 +1,4 @@
-package com.xnx3.yunbackups.defaultStorage;
+package com.xnx3.yunbackups.storage;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -6,7 +6,7 @@ import com.obs.services.exception.ObsException;
 import com.xnx3.BaseVO;
 import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
 import com.xnx3.yunbackups.core.util.SystemUtil;
-import com.xnx3.yunbackups.defaultStorage.huawei.OBSHandler;
+import com.xnx3.yunbackups.storage.huawei.OBSHandler;
 
 /**
  * 通过华为云 OBS备份同步 

@@ -1,4 +1,4 @@
-package com.xnx3.yunbackups.defaultStorage.huawei;
+package com.xnx3.yunbackups.storage.huawei;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

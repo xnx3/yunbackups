@@ -6,11 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.NebulaSkin;
-
 import com.xnx3.yunbackups.commandLineApp.config.CloudConfig;
-import com.xnx3.yunbackups.core.backups.BackupsThread;
 import com.xnx3.yunbackups.core.subsidiary.BackupsPathSynchronizationThread;
-import com.xnx3.yunbackups.defaultStorage.HuaweiyunOBS;
 import com.xnx3.yunbackups.visualApp.action.CreateTray;
 import com.xnx3.yunbackups.visualApp.action.LogJPanelAction;
 import com.xnx3.yunbackups.visualApp.ui.MainJFrame;

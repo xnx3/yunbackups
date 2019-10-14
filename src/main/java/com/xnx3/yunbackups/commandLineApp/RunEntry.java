@@ -7,7 +7,7 @@ import com.xnx3.yunbackups.commandLineApp.backups.ProgressListener;
 import com.xnx3.yunbackups.commandLineApp.config.CloudConfig;
 import com.xnx3.yunbackups.core.backups.BackupsThread;
 import com.xnx3.yunbackups.core.subsidiary.BackupsPathSynchronizationThread;
-import com.xnx3.yunbackups.defaultStorage.HuaweiyunOBS;
+import com.xnx3.yunbackups.storage.HuaweiyunOBS;
 
 /**
  * 云客户端的运行入口

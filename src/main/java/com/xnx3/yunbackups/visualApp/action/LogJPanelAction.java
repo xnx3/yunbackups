@@ -2,7 +2,7 @@ package com.xnx3.yunbackups.visualApp.action;
 
 import com.xnx3.yunbackups.commandLineApp.Global;
 import com.xnx3.yunbackups.core.backups.BackupsThread;
-import com.xnx3.yunbackups.defaultStorage.HuaweiyunOBS;
+import com.xnx3.yunbackups.storage.HuaweiyunOBS;
 import com.xnx3.yunbackups.visualApp.backups.ExceptionListener;
 import com.xnx3.yunbackups.visualApp.backups.ProgressListener;
 

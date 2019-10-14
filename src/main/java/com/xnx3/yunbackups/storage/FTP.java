@@ -1,21 +1,16 @@
-package com.xnx3.yunbackups.defaultStorage;
+package com.xnx3.yunbackups.storage;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.net.UnknownHostException;
-
-import com.obs.services.exception.ObsException;
 import com.xnx3.BaseVO;
 import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
-import com.xnx3.yunbackups.core.util.SystemUtil;
-import com.xnx3.yunbackups.defaultStorage.huawei.OBSHandler;
 
 /**
- * 通过阿里云OSS备份同步
+ * 通过FTP备份同步
  * @author 管雷鸣
  *
  */
-public class AliyunOSS implements StorageInterface{
+public class FTP implements StorageInterface {
 
 	public BaseVO isUsable() {
 		// TODO Auto-generated method stub
@@ -26,5 +21,5 @@ public class AliyunOSS implements StorageInterface{
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 }

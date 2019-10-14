@@ -1,4 +1,4 @@
-package com.xnx3.yunbackups.defaultStorage;
+package com.xnx3.yunbackups.storage;
 
 import java.io.File;
 import java.net.UnknownHostException;
@@ -6,11 +6,11 @@ import com.xnx3.BaseVO;
 import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
 
 /**
- * 通过FTP备份同步
+ * 通过阿里云OSS备份同步
  * @author 管雷鸣
  *
  */
-public class FTP implements StorageInterface {
+public class AliyunOSS implements StorageInterface{
 
 	public BaseVO isUsable() {
 		// TODO Auto-generated method stub
@@ -21,5 +21,5 @@ public class FTP implements StorageInterface {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }
