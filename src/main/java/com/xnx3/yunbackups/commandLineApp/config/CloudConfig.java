@@ -1,11 +1,11 @@
-package com.xnx3.yunbackups.computerDesktopApp.config;
+package com.xnx3.yunbackups.commandLineApp.config;
 
 import java.util.ArrayList;
 import java.util.List;
 import com.xnx3.FileUtil;
 import com.xnx3.StringUtil;
 import com.xnx3.json.JSONUtil;
-import com.xnx3.yunbackups.computerDesktopApp.bean.CloudConfigBean;
+import com.xnx3.yunbackups.commandLineApp.bean.CloudConfigBean;
 import com.xnx3.yunbackups.core.Global;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;

@@ -1,22 +1,18 @@
-package com.xnx3.yunbackups.computerDesktopApp.ui;
+package com.xnx3.yunbackups.visualApp.ui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.FileManageJPanel;
-import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.LogJPanel;
-import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.SystemJPanel;
-
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JMenuItem;
+import com.xnx3.yunbackups.visualApp.Global;
 import javax.swing.JTabbedPane;
 
+/**
+ * 主界面
+ * @author 管雷鸣
+ *
+ */
 public class MainJFrame extends JFrame {
 
 	private JPanel contentPane;
@@ -42,6 +38,7 @@ public class MainJFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainJFrame() {
+		setTitle("yunbackups v"+Global.VERSION +"    云备份软件，保障您的数据安全！");
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

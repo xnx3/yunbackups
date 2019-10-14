@@ -1,18 +1,11 @@
-package com.xnx3.yunbackups.computerDesktopApp.ui.JPanel;
+package com.xnx3.yunbackups.visualApp.ui.JPanel;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
-import com.xnx3.yunbackups.computerDesktopApp.Global;
-import com.xnx3.yunbackups.computerDesktopApp.action.LogJPanelAction;
-import com.xnx3.yunbackups.computerDesktopApp.backups.ExceptionListener;
-import com.xnx3.yunbackups.computerDesktopApp.backups.ProgressListener;
-import com.xnx3.yunbackups.core.backups.BackupsThread;
-import com.xnx3.yunbackups.defaultStorage.HuaweiyunOBS;
-
+import com.xnx3.yunbackups.visualApp.action.LogJPanelAction;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

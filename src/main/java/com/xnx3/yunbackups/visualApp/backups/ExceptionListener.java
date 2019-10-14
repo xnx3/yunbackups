@@ -1,9 +1,7 @@
-package com.xnx3.yunbackups.computerDesktopApp.backups;
+package com.xnx3.yunbackups.visualApp.backups;
 
 import java.net.UnknownHostException;
-
-import com.xnx3.swing.DialogUtil;
-import com.xnx3.yunbackups.computerDesktopApp.action.CreateTray;
+import com.xnx3.yunbackups.visualApp.action.CreateTray;
 
 /**
  * 异常监听

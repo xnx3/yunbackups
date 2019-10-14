@@ -1,4 +1,4 @@
-package com.xnx3.yunbackups.computerDesktopApp;
+package com.xnx3.yunbackups.visualApp;
 
 import java.io.IOException;
 import javax.swing.JDialog;
@@ -7,17 +7,17 @@ import javax.swing.SwingUtilities;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.NebulaSkin;
 
-import com.xnx3.yunbackups.computerDesktopApp.action.CreateTray;
-import com.xnx3.yunbackups.computerDesktopApp.action.LogJPanelAction;
-import com.xnx3.yunbackups.computerDesktopApp.config.CloudConfig;
-import com.xnx3.yunbackups.computerDesktopApp.ui.MainJFrame;
-import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.FileManageJPanel;
-import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.HuaWeiConfigJPanel;
-import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.LogJPanel;
-import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.SystemJPanel;
+import com.xnx3.yunbackups.commandLineApp.config.CloudConfig;
 import com.xnx3.yunbackups.core.backups.BackupsThread;
 import com.xnx3.yunbackups.core.subsidiary.BackupsPathSynchronizationThread;
 import com.xnx3.yunbackups.defaultStorage.HuaweiyunOBS;
+import com.xnx3.yunbackups.visualApp.action.CreateTray;
+import com.xnx3.yunbackups.visualApp.action.LogJPanelAction;
+import com.xnx3.yunbackups.visualApp.ui.MainJFrame;
+import com.xnx3.yunbackups.visualApp.ui.JPanel.FileManageJPanel;
+import com.xnx3.yunbackups.visualApp.ui.JPanel.HuaWeiConfigJPanel;
+import com.xnx3.yunbackups.visualApp.ui.JPanel.LogJPanel;
+import com.xnx3.yunbackups.visualApp.ui.JPanel.SystemJPanel;
 
 /**
  * 云客户端的运行入口
@@ -41,7 +41,7 @@ public class ClientEntry {
 				Global.logJPanel = new LogJPanel();
 				
 				//加载云端配置参数
-				Global.cloudConfigBean = CloudConfig.read();
+				com.xnx3.yunbackups.commandLineApp.Global.cloudConfigBean = CloudConfig.read();
 				
 				Global.mainJFrame = new MainJFrame();
 				Global.mainJFrame.setSize(1000, 600);
@@ -52,8 +52,8 @@ public class ClientEntry {
 				Global.mainJFrame.setVisible(true);
 				
 				//判断一下是否设置过备份服务器相关参数，若已经设置了，那么自动运行
-				if(Global.cloudConfigBean.getBucketName() != null && Global.cloudConfigBean.getBucketName().length() > 0){
-					System.out.println("---clickRunButton---");
+				if(com.xnx3.yunbackups.commandLineApp.Global.cloudConfigBean.getBucketName() != null && com.xnx3.yunbackups.commandLineApp.Global.cloudConfigBean.getBucketName().length() > 0){
+					System.out.println("run...");
 					LogJPanelAction.clickRunButton();
 				}
 			}

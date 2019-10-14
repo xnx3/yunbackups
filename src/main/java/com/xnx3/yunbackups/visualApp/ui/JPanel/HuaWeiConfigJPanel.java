@@ -1,4 +1,4 @@
-package com.xnx3.yunbackups.computerDesktopApp.ui.JPanel;
+package com.xnx3.yunbackups.visualApp.ui.JPanel;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -7,10 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import com.xnx3.yunbackups.computerDesktopApp.Global;
-import com.xnx3.yunbackups.computerDesktopApp.bean.CloudConfigBean;
-import com.xnx3.yunbackups.computerDesktopApp.config.CloudConfig;
-
+import com.xnx3.yunbackups.commandLineApp.Global;
+import com.xnx3.yunbackups.commandLineApp.bean.CloudConfigBean;
+import com.xnx3.yunbackups.commandLineApp.config.CloudConfig;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

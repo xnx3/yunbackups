@@ -1,8 +1,8 @@
-package com.xnx3.yunbackups.computerDesktopApp.backups;
+package com.xnx3.yunbackups.visualApp.backups;
 
 import java.io.File;
 import com.xnx3.DateUtil;
-import com.xnx3.yunbackups.computerDesktopApp.Global;
+import com.xnx3.yunbackups.visualApp.Global;
 import com.xnx3.yunbackups.core.backups.ScanTask;
 
 /**

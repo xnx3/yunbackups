@@ -1,4 +1,4 @@
-package com.xnx3.yunbackups.computerDesktopApp.action;
+package com.xnx3.yunbackups.visualApp.action;
 
 import java.awt.PopupMenu;
 import java.awt.TrayIcon;
@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import com.xnx3.swing.DialogUtil;
 import com.xnx3.swing.TrayUtil;
-import com.xnx3.yunbackups.computerDesktopApp.Global;
+import com.xnx3.yunbackups.visualApp.Global;
 
 /**
  * 创建当前程序的托盘

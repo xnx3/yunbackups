@@ -1,4 +1,4 @@
-package com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.fileManage;
+package com.xnx3.yunbackups.visualApp.ui.JPanel.fileManage;
 
 
 import java.awt.BorderLayout;

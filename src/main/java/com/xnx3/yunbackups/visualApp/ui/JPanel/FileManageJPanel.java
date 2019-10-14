@@ -1,4 +1,4 @@
-package com.xnx3.yunbackups.computerDesktopApp.ui.JPanel;
+package com.xnx3.yunbackups.visualApp.ui.JPanel;
 
 import javax.swing.JPanel;
 import java.util.Map;
@@ -12,10 +12,11 @@ import javax.swing.table.DefaultTableModel;
 import com.xnx3.DateUtil;
 import com.xnx3.exception.NotReturnValueException;
 import com.xnx3.swing.DialogUtil;
-import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.fileManage.FileEditJDialog;
-import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.fileManage.MyButtonRenderer;
 import com.xnx3.yunbackups.core.Global;
 import com.xnx3.yunbackups.core.bean.BackupsPath;
+import com.xnx3.yunbackups.visualApp.ui.JPanel.fileManage.FileEditJDialog;
+import com.xnx3.yunbackups.visualApp.ui.JPanel.fileManage.MyButtonRenderer;
+
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -65,16 +66,12 @@ public class FileManageJPanel extends JPanel {
 		Vector vData = new Vector();
 		Vector vName = new Vector();
 		vName.add("文件路径");
-		vName.add("最后备份时间");
 		vName.add("");
 		vName.add("");
 		
 		model = new DefaultTableModel(vData, vName){
 			@Override
 			public boolean isCellEditable(int row, int column) {
-				if(column == 1){
-					return true;
-				}
 				return false;
 			}
 		};
@@ -85,10 +82,10 @@ public class FileManageJPanel extends JPanel {
 			    int col=table.getSelectedColumn();
 			    String path = table.getValueAt(row, 0).toString();
 			    
-			    if(col == 2){
+			    if(col == 1){
 			    	//修改
 			    	editBackupsPath(path); 
-			    }else if(col == 3){
+			    }else if(col == 2){
 			    	//删除
 			    	if(DialogUtil.showConfirmDialog("确定要删除吗?<br/>"+path) - DialogUtil.CONFIRM_YES == 0){
 			    		Global.backupsPathMap.remove(path);
@@ -108,12 +105,11 @@ public class FileManageJPanel extends JPanel {
 		/*********/
 		refreshTable();
 		
-		table.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(160);
 		table.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(160);
+		table.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(160);
 		
-//		table.getColumnModel().getColumn(2).setCellEditor( new MyButtonEditor());
+        table.getColumnModel().getColumn(1).setCellRenderer(  new MyButtonRenderer());
         table.getColumnModel().getColumn(2).setCellRenderer(  new MyButtonRenderer());
-        table.getColumnModel().getColumn(3).setCellRenderer(  new MyButtonRenderer());
         table.setRowSelectionAllowed(false);
 	}
 	
@@ -126,12 +122,6 @@ public class FileManageJPanel extends JPanel {
 			
 			Vector vRow = new Vector();
 			vRow.add(backupsPath.getPath());
-			String time = "尚未备份";
-			try {
-				time = DateUtil.dateFormat(backupsPath.getLasttime(), "yyyy-MM-dd hh:mm");
-			} catch (NotReturnValueException e) {
-			}
-			vRow.add(time);
 			vRow.add("修改");
 			vRow.add("删除");
 			

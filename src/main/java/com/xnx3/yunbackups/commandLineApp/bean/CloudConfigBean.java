@@ -1,4 +1,4 @@
-package com.xnx3.yunbackups.computerDesktopApp.bean;
+package com.xnx3.yunbackups.commandLineApp.bean;
 
 /**
  * 云端配置

@@ -1,4 +1,4 @@
-package com.xnx3.yunbackups.computerDesktopApp.ui.JPanel;
+package com.xnx3.yunbackups.visualApp.ui.JPanel;
 
 import java.awt.EventQueue;
 import javax.swing.JPanel;

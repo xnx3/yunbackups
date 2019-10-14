@@ -1,10 +1,10 @@
-package com.xnx3.yunbackups.computerDesktopApp.action;
+package com.xnx3.yunbackups.visualApp.action;
 
-import com.xnx3.yunbackups.computerDesktopApp.Global;
-import com.xnx3.yunbackups.computerDesktopApp.backups.ExceptionListener;
-import com.xnx3.yunbackups.computerDesktopApp.backups.ProgressListener;
+import com.xnx3.yunbackups.commandLineApp.Global;
 import com.xnx3.yunbackups.core.backups.BackupsThread;
 import com.xnx3.yunbackups.defaultStorage.HuaweiyunOBS;
+import com.xnx3.yunbackups.visualApp.backups.ExceptionListener;
+import com.xnx3.yunbackups.visualApp.backups.ProgressListener;
 
 /**
  * LogJPanel 相关动作
@@ -27,8 +27,8 @@ public class LogJPanelAction {
 		//开始执行此线程，开始备份
 		backupsThread.start();
 		
-		Global.logJPanel.runButton.setVisible(false);
-		Global.logJPanel.statusLabel.setText("扫描中...");
+		com.xnx3.yunbackups.visualApp.Global.logJPanel.runButton.setVisible(false);
+		com.xnx3.yunbackups.visualApp.Global.logJPanel.statusLabel.setText("扫描中...");
 	}
 	
 }

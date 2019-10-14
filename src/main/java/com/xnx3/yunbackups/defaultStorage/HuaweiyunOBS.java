@@ -9,7 +9,7 @@ import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.defaultStorage.huawei.OBSHandler;
 
 /**
- * 附件上传之 华为云 OBS 
+ * 通过华为云 OBS备份同步 
  * @author 管雷鸣
  *
  */
