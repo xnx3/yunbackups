@@ -26,7 +26,6 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 	}
 
 	public void sortFinish(ScanTask scanTask) {
-		Global.logJPanel.currentBackupsFilePathLabel.setText("<html>123");
 		Global.logJPanel.sortTimeLabel.setText((scanTask.getSortFinishTime() - scanTask.getScanFinishTime())+" ms");
 	}
 
@@ -73,13 +72,17 @@ class LogBackupsOneFileFinishThread extends Thread{
 	
 	public void run() {
 		while (run) {
-			//0.1秒更新一次ui
+			//1秒更新一次ui
 			try {
-				Thread.sleep(500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			Global.logJPanel.currentBackupsFilePathLabel.setText("<html>"+currentPath);
+			try {
+				Global.logJPanel.currentBackupsFilePathLabel.setText("<html>"+currentPath);
+			} catch (Exception e) {
+				System.out.println("ProgressListener 85 line : "+e.getMessage());
+			}
 		}
 	}
 }

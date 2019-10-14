@@ -1,6 +1,7 @@
 package com.xnx3.yunbackups.computerDesktopApp;
 
 import com.xnx3.yunbackups.computerDesktopApp.bean.CloudConfigBean;
+import com.xnx3.yunbackups.computerDesktopApp.ui.MainJFrame;
 import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.LogJPanel;
 
 /**
@@ -9,6 +10,9 @@ import com.xnx3.yunbackups.computerDesktopApp.ui.JPanel.LogJPanel;
  *
  */
 public class Global {
+	//主界面
+	public static MainJFrame mainJFrame;
+	
 	//日志面板
 	public static LogJPanel logJPanel;
 	

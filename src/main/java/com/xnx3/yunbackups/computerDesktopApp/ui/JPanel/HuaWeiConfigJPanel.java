@@ -15,6 +15,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * 华为云配置
+ * @author 管雷鸣
+ *
+ */
 public class HuaWeiConfigJPanel extends JPanel {
 	private JTextField accessKeyIdTextField;
 	private JTextField secretAccessKeyTextField;
@@ -41,7 +46,7 @@ public class HuaWeiConfigJPanel extends JPanel {
 		bucketNameTextField = new JTextField();
 		bucketNameTextField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("保存");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CloudConfigBean bean = new CloudConfigBean();
@@ -76,11 +81,11 @@ public class HuaWeiConfigJPanel extends JPanel {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblSecretAccessKey, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(secretAccessKeyTextField, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE))
+									.addComponent(secretAccessKeyTextField, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblBA, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(bucketNameTextField, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE))))
+									.addComponent(bucketNameTextField, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(105)
 							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
@@ -88,7 +93,7 @@ public class HuaWeiConfigJPanel extends JPanel {
 							.addContainerGap()
 							.addComponent(lblObsendpoint, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(endPointTextField, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(endPointTextField, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -116,6 +121,11 @@ public class HuaWeiConfigJPanel extends JPanel {
 		);
 		setLayout(groupLayout);
 
+		//数据填充，但要考虑数据泄漏危险
+		accessKeyIdTextField.setText(Global.cloudConfigBean.getAccessKeyId());
+		secretAccessKeyTextField.setText(Global.cloudConfigBean.getSecretAccessKey());
+		bucketNameTextField.setText(Global.cloudConfigBean.getBucketName());
+		endPointTextField.setText(Global.cloudConfigBean.getEndpoint());
 	}
 	public JTextField getAccessKeyIdTextField() {
 		return accessKeyIdTextField;

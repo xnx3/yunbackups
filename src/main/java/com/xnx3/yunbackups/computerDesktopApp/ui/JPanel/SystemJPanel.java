@@ -1,18 +1,13 @@
 package com.xnx3.yunbackups.computerDesktopApp.ui.JPanel;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import com.xnx3.Lang;
 import com.xnx3.yunbackups.core.Global;
 import com.xnx3.yunbackups.core.config.System;
-import net.sf.json.JSONArray;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
