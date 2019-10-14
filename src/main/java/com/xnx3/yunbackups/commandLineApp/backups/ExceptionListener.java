@@ -11,7 +11,7 @@ import com.xnx3.yunbackups.commandLineApp.Global;
  *
  */
 public class ExceptionListener implements com.xnx3.yunbackups.core.backups.interfaces.ExceptionListener{
-	public static final String ERROR_NAME = "error.log";	//错误日志文件的文件名
+	public static final String ERROR_NAME = "exception.log";	//错误日志文件的文件名
 	
 	public int unknownHostException(UnknownHostException e) {
 		log("网络异常，链接失败,30秒后重试！"+e.getMessage());
