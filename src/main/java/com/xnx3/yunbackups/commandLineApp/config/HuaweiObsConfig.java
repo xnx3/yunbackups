@@ -8,11 +8,14 @@ import com.xnx3.yunbackups.core.Global;
 import net.sf.json.JSONObject;
 
 /**
- * 软件配置
+ * 华为云配置
  * @author 管雷鸣
  *
  */
-public class CloudConfig {
+public class HuaweiObsConfig {
+	//配置文件的名字
+	public static final String FILE_NAME = "storage_huaweiobs.config";
+	
 	/**
 	 * 保存配置信息到本地
 	 * @param bean {@link CloudConfigBean}配置信息
@@ -20,7 +23,7 @@ public class CloudConfig {
 	public static void save(CloudConfigBean bean){
 		JSONObject json = JSONObject.fromObject(bean);
 		java.lang.System.out.println(json.toString());
-		FileUtil.write(Global.CONFIG_PATH+"cloudConfig.config", StringUtil.StringToUtf8(json.toString()));
+		FileUtil.write(Global.CONFIG_PATH+FILE_NAME, StringUtil.StringToUtf8(json.toString()));
 	}
 	
 	/**
@@ -28,8 +31,7 @@ public class CloudConfig {
 	 */
 	public static CloudConfigBean read(){
 		CloudConfigBean bean = new CloudConfigBean();
-		System.out.println(Global.CONFIG_PATH+"cloudConfig.config");
-		String content = FileUtil.read(Global.CONFIG_PATH+"cloudConfig.config");
+		String content = FileUtil.read(Global.CONFIG_PATH+FILE_NAME);
 		content = StringUtil.utf8ToString(content);
 		if(content == null || content.length() == 0){
 			//第一次用，还没有配置文件

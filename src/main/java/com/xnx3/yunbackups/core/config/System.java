@@ -20,8 +20,14 @@ public class System {
 	 * @param loginInfo 要保存的一些登陆信息
 	 */
 	public static void save(com.xnx3.yunbackups.core.bean.System system){
+//		JSONObject json = new JSONObject();
+//		json.put("fileMaxSize", system.getFileMaxSize());
+//		json.put("ignoreSuffixNameList", JSONArray.fromObject(system.getIgnoreSuffixNameList()));
+//		json.put("intervalTime", system.getIntervalTime());
+//		json.put("suffixNameList", JSONArray.fromObject(system.getSuffixNameList()));
+//		json.put("hiddenFileScan", system.isHiddenFileScan());
 		JSONObject json = JSONObject.fromObject(system);
-		FileUtil.write(Global.CONFIG_PATH+"system.config", StringUtil.StringToUtf8(json.toString()));
+		FileUtil.write(Global.CONFIG_PATH+"system.config", json.toString());
 	}
 	
 	/**
@@ -31,7 +37,8 @@ public class System {
 		com.xnx3.yunbackups.core.bean.System system = new com.xnx3.yunbackups.core.bean.System();
 		
 		String content = FileUtil.read(Global.CONFIG_PATH+"system.config");
-		content = StringUtil.utf8ToString(content);
+//		content = StringUtil.utf8ToString(content);
+//		java.lang.System.out.println(content);
 		if(content == null || content.length() == 0){
 			//第一次用，还没有配置文件
 		}else{
