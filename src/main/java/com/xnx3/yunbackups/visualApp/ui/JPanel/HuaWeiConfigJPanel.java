@@ -6,10 +6,10 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
 import com.xnx3.yunbackups.commandLineApp.Global;
 import com.xnx3.yunbackups.commandLineApp.bean.CloudConfigBean;
-import com.xnx3.yunbackups.commandLineApp.config.CloudConfig;
+import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -57,7 +57,7 @@ public class HuaWeiConfigJPanel extends JPanel {
 				//更新持久缓存
 				Global.cloudConfigBean = bean;
 				//保存到本地配置文件
-				CloudConfig.save(bean);
+				HuaweiObsConfig.save(bean);
 			}
 		});
 		

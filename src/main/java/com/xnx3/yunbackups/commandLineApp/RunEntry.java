@@ -1,10 +1,9 @@
 package com.xnx3.yunbackups.commandLineApp;
 
 import java.io.IOException;
-
 import com.xnx3.yunbackups.commandLineApp.backups.ExceptionListener;
 import com.xnx3.yunbackups.commandLineApp.backups.ProgressListener;
-import com.xnx3.yunbackups.commandLineApp.config.CloudConfig;
+import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
 import com.xnx3.yunbackups.core.backups.BackupsThread;
 import com.xnx3.yunbackups.core.subsidiary.BackupsPathSynchronizationThread;
 import com.xnx3.yunbackups.storage.HuaweiyunOBS;
@@ -19,7 +18,7 @@ public class RunEntry {
 	public static void main(String[] args) throws IOException {
 		
 		//加载云端配置参数
-		Global.cloudConfigBean = CloudConfig.read();
+		Global.cloudConfigBean = HuaweiObsConfig.read();
 				
 		//判断一下是否设置过备份服务器相关参数，若已经设置了，那么自动运行
 		if(Global.cloudConfigBean.getBucketName() != null && Global.cloudConfigBean.getBucketName().length() > 0){

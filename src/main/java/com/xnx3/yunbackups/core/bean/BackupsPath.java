@@ -25,5 +25,10 @@ public class BackupsPath {
 		this.lasttime = lasttime;
 	}
 	
+	@Override
+	public String toString() {
+		return "BackupsPath [path=" + path + ", lasttime=" + lasttime + "]";
+	}
+	
 	
 }

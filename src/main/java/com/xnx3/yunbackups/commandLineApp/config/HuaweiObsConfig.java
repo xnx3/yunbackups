@@ -22,8 +22,7 @@ public class HuaweiObsConfig {
 	 */
 	public static void save(CloudConfigBean bean){
 		JSONObject json = JSONObject.fromObject(bean);
-		java.lang.System.out.println(json.toString());
-		FileUtil.write(Global.CONFIG_PATH+FILE_NAME, StringUtil.StringToUtf8(json.toString()));
+		FileUtil.write(Global.CONFIG_PATH+FILE_NAME, json.toString());
 	}
 	
 	/**
@@ -32,7 +31,6 @@ public class HuaweiObsConfig {
 	public static CloudConfigBean read(){
 		CloudConfigBean bean = new CloudConfigBean();
 		String content = FileUtil.read(Global.CONFIG_PATH+FILE_NAME);
-		content = StringUtil.utf8ToString(content);
 		if(content == null || content.length() == 0){
 			//第一次用，还没有配置文件
 		}else{

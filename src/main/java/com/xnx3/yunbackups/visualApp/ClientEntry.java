@@ -6,7 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.NebulaSkin;
-import com.xnx3.yunbackups.commandLineApp.config.CloudConfig;
+
+import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
 import com.xnx3.yunbackups.core.subsidiary.BackupsPathSynchronizationThread;
 import com.xnx3.yunbackups.visualApp.action.CreateTray;
 import com.xnx3.yunbackups.visualApp.action.LogJPanelAction;
@@ -38,7 +39,7 @@ public class ClientEntry {
 				Global.logJPanel = new LogJPanel();
 				
 				//加载云端配置参数
-				com.xnx3.yunbackups.commandLineApp.Global.cloudConfigBean = CloudConfig.read();
+				com.xnx3.yunbackups.commandLineApp.Global.cloudConfigBean = HuaweiObsConfig.read();
 				
 				Global.mainJFrame = new MainJFrame();
 				Global.mainJFrame.setSize(1000, 600);

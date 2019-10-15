@@ -22,13 +22,21 @@ public class BackupsPath {
 	 * @param loginInfo 要保存的一些登陆信息
 	 */
 	public static void save(Map<String, com.xnx3.yunbackups.core.bean.BackupsPath> map){
-		//将map转化为list
-		List<com.xnx3.yunbackups.core.bean.BackupsPath> list = new ArrayList<com.xnx3.yunbackups.core.bean.BackupsPath>();
+		//将map转化为 JSONArray
+		JSONArray jsonArray = new JSONArray();
 		for(Map.Entry<String, com.xnx3.yunbackups.core.bean.BackupsPath> entry : map.entrySet()){
-			list.add(entry.getValue());
+			JSONObject json = JSONObject.fromObject(entry.getValue());
+			json.put("path", StringUtil.StringToUtf8(entry.getValue().getPath()));	//将path抓化为utf8编码
+			jsonArray.add(json);
 		}
-		JSONArray json = JSONArray.fromObject(list);
-		FileUtil.write(Global.CONFIG_PATH+"backupsPath.config", StringUtil.StringToUtf8(json.toString()));
+//		
+//		List<com.xnx3.yunbackups.core.bean.BackupsPath> list = new ArrayList<com.xnx3.yunbackups.core.bean.BackupsPath>();
+//		for(Map.Entry<String, com.xnx3.yunbackups.core.bean.BackupsPath> entry : map.entrySet()){
+//			com.xnx3.yunbackups.core.bean.BackupsPath backupsPath = entry.getValue();
+//			list.add(entry.getValue());
+//		}
+//		JSONArray json = JSONArray.fromObject(list);
+		FileUtil.write(Global.CONFIG_PATH+"backupsPath.config", jsonArray.toString());
 	}
 	
 	/**
@@ -38,7 +46,6 @@ public class BackupsPath {
 		Map<String, com.xnx3.yunbackups.core.bean.BackupsPath> map = new HashMap<String, com.xnx3.yunbackups.core.bean.BackupsPath>();
 		
 		String content = FileUtil.read(Global.CONFIG_PATH+"backupsPath.config");
-		content = StringUtil.utf8ToString(content);
 		if(content == null || content.length() == 0){
 			//第一次用，还没有配置文件
 		}else{
@@ -48,12 +55,11 @@ public class BackupsPath {
 				for (int i = 0; i < jsonArray.size(); i++) {
 					JSONObject json = jsonArray.getJSONObject(i);
 					com.xnx3.yunbackups.core.bean.BackupsPath backupsPath = new com.xnx3.yunbackups.core.bean.BackupsPath();
-					backupsPath.setPath(JSONUtil.getString(json, "path"));
+					backupsPath.setPath(StringUtil.utf8ToString(JSONUtil.getString(json, "path")));
 					try {
 						backupsPath.setLasttime(Long.parseLong(JSONUtil.getString(json, "lasttime")));
 					} catch (Exception e) {
 					}
-					
 					map.put(backupsPath.getPath(), backupsPath);
 				}
 			} catch (Exception e) {
