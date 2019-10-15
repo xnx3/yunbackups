@@ -22,7 +22,6 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 
 	public void scanFinish(ScanTask scanTask) {
 		ProgressListener.scanTask = scanTask;
-		
 		StringBuffer sb = new StringBuffer();
 		//scanTask
 		sb.append("当前备份的目录:"+scanTask.getBackupsPath().getPath());

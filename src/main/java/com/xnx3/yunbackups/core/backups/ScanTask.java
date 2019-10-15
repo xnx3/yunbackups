@@ -108,29 +108,26 @@ public class ScanTask {
 	 */
 	protected void sort(){
 		try{
-		
-		
-		//排序，筛选出最近修改的文件
-		Collections.sort(subFileList, new Comparator<File>() {
-			public int compare(File file1, File file2) {
-				files1 = file1;
-				files2 = file2;
-				
-				if(file1 == null || file2 == null){
+			//排序，筛选出最近修改的文件
+			Collections.sort(subFileList, new Comparator<File>() {
+				public int compare(File file1, File file2) {
+					files1 = file1;
+					files2 = file2;
+					
+					if(file1 == null || file2 == null){
+						return 0;
+					}
+					long diff = file1.lastModified() - file2.lastModified();
+					if (diff > 0) {
+						return 1;
+					}else if (diff < 0) {
+						return -1;
+					}
+					
+					//直接返回0，速度提升是进行下面判断的4倍！
 					return 0;
 				}
-				long diff = file1.lastModified() - file2.lastModified();
-				if (diff > 0) {
-					return 1;
-				}else if (diff < 0) {
-					return -1;
-				}
-				
-				//直接返回0，速度提升是进行下面判断的4倍！
-				return 0;
-			}
-		});
-		
+			});
 		} catch (java.lang.IllegalArgumentException e) {
 			System.out.println("files1: "+files1.getPath());
 			System.out.println("files2: "+files2.getPath());
@@ -159,6 +156,7 @@ public class ScanTask {
 	 * @param file 要扫描的文件夹
 	 */
 	protected void findSubFileList(File file){
+		//判断文件是否存在
 		if(file == null){
 			return;
 		}
@@ -166,39 +164,36 @@ public class ScanTask {
 			return;
 		}
 		
-		//获取到file下所有子文件（或文件夹）
-		File[] subFiles = file.listFiles();
-		if(subFiles == null){
-			return;
+		//增加一次统计
+		allFileNumber++;
+		
+		if(!Global.system.isHiddenFileScan()){
+			//如果不扫描隐藏文件，还要先判断一下当前文件是否是隐藏的，如果是隐藏的，那么忽略
+			if(file.isHidden()){
+				//如果当前文件或文件夹是隐藏的，那就忽略，继续下一个文件
+				return;
+			}
 		}
 		
-		for (int i = 0; i < subFiles.length; i++) {
-			allFileNumber++;
-			
-			if(!Global.system.isHiddenFileScan()){
-				//如果不扫描隐藏文件，还要先判断一下当前文件是否是隐藏的，如果是隐藏的，那么忽略
-				if(subFiles[i].isHidden()){
-					//如果当前文件或文件夹是隐藏的，那就忽略，继续下一个文件
-					continue;
-				}
-			}
-			
+		//判断当前是文件，还是目录
+		if(file.isFile()){
 			//时间判断，当前文件是否时间点比较新的文件，可备份的
-			if(subFiles[i].lastModified() - this.backupsPath.getLasttime() - 1 > 0){
+			if(file.lastModified() - this.backupsPath.getLasttime() - 1 > 0){
 				//如果这里就是上一次某个具体秒数的时间备份了，这次还继续备份一次，也就是最后一次备份的秒数那个时间点备份两次。一秒创建不了多少文件，顶多也就是额外多备份几个文件而已
 				//时间通过，未备份过的新文件，可以进行备份
 			}else{
 				//在lasttime之前的，那么忽略
-				continue;
+				return;
 			}
 			
-			if(subFiles[i].length() > Global.system.getFileMaxSize()){
+			//文件大小
+			if(file.length() > Global.system.getFileMaxSize()){
 				//文件大小超过设定的最大大小，忽略
-				continue;
+				return;
 			}
 			
 			//判断文件后缀名
-			String[] suffixs = subFiles[i].getName().split("\\.");
+			String[] suffixs = file.getName().split("\\.");
 			String suffix = "";	//后缀名，另外有的文件没有后缀，那么就是空字符串
 			if(suffixs.length > 1){
 				suffix = suffixs[suffixs.length-1].trim();
@@ -214,7 +209,7 @@ public class ScanTask {
 				}
 				if(!kebeifen){
 					//如果不是可备份的，那么就跳出，不备份这个文件
-					continue;
+					return;
 				}
 			}
 			//如果指定了某些特殊后缀名不进行备份，那么判断一下当前文件后缀名是否是在不备份的后缀里面
@@ -228,23 +223,34 @@ public class ScanTask {
 				}
 				if(find){
 					//发现了这个文件后缀已经在不可备份文件的后缀里面，那么就跳出，不备份这个文件
-					continue;
+					return;
 				}
 			}
 			
+			//过了上面的条件到达这一步了，那么就可以加入待备份文件列表中，等待备份
+			subFileList.add(file);
+			//可备份文件增加一个记录
+			scanAccordNumber++;
+			if(this.listener != null){
+				this.listener.scanAccordFile(this, file);
+			}
+		}else if (file.isDirectory()) {
+			//目录
 			
-			if(subFiles[i].isFile()){
-				//如果是文件，那么直接加入返回列表
-				subFileList.add(subFiles[i]);
-				scanAccordNumber++;
-				if(this.listener != null){
-					this.listener.scanAccordFile(this, subFiles[i]);
-				}
-			}else if (subFiles[i].isDirectory()) {
-				//如果是文件夹，那么还要往下找，找到这个文件夹内的子文件
+			//获取到file下所有子文件（或文件夹）
+			File[] subFiles = file.listFiles();
+			if(subFiles == null){
+				return;
+			}
+			for (int i = 0; i < subFiles.length; i++) {
+				//还要往下找，找到这个文件夹内的子文件列表，继续判断
 				findSubFileList(subFiles[i]);
 			}
+		}else{
+			//不是文件又不是目录，那是什么鬼
+			System.out.println("=============不是文件也不是目录："+file.getPath());
 		}
+		
 	}
 	
 	public String toString() {
