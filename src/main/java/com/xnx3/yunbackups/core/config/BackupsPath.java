@@ -1,8 +1,6 @@
 package com.xnx3.yunbackups.core.config;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import com.xnx3.FileUtil;
 import com.xnx3.StringUtil;
@@ -29,13 +27,6 @@ public class BackupsPath {
 			json.put("path", StringUtil.StringToUtf8(entry.getValue().getPath()));	//将path抓化为utf8编码
 			jsonArray.add(json);
 		}
-//		
-//		List<com.xnx3.yunbackups.core.bean.BackupsPath> list = new ArrayList<com.xnx3.yunbackups.core.bean.BackupsPath>();
-//		for(Map.Entry<String, com.xnx3.yunbackups.core.bean.BackupsPath> entry : map.entrySet()){
-//			com.xnx3.yunbackups.core.bean.BackupsPath backupsPath = entry.getValue();
-//			list.add(entry.getValue());
-//		}
-//		JSONArray json = JSONArray.fromObject(list);
 		FileUtil.write(Global.CONFIG_PATH+"backupsPath.config", jsonArray.toString());
 	}
 	

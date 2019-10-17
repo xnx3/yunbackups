@@ -1,7 +1,6 @@
 package com.xnx3.yunbackups.commandLineApp.config;
 
 import com.xnx3.FileUtil;
-import com.xnx3.StringUtil;
 import com.xnx3.json.JSONUtil;
 import com.xnx3.yunbackups.commandLineApp.bean.CloudConfigBean;
 import com.xnx3.yunbackups.core.Global;

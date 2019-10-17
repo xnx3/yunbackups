@@ -5,6 +5,11 @@ import java.util.Map;
 import com.xnx3.SystemUtil;
 import com.xnx3.yunbackups.core.bean.BackupsPath;
 
+/**
+ * core 全局缓存
+ * @author 管雷鸣
+ *
+ */
 public class Global {
 	public static final String CONFIG_PATH = SystemUtil.getCurrentDir()+File.separator+"config"+File.separator;	//配置文件所在的文件夹
 	static{
