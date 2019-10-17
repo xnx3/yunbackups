@@ -18,6 +18,11 @@ public class System {
 	private long fileMaxSize;	//允许备份的文件最大大小。单位是字节(B)
 	private boolean hiddenFileScan=false;	//是否扫描备份隐藏的文件或文件夹，true：是，false：不扫描(那也就是不备份了)
 	
+	public System() {
+		this.intervalTime = 60;	//默认1小时
+		this.fileMaxSize = 524288000;	//默认 500MB
+	}
+	
 	public int getIntervalTime() {
 		return intervalTime;
 	}
