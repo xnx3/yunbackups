@@ -39,7 +39,7 @@ public class FileManageJPanel extends JPanel {
 		JButton btnNewButton = new JButton("添加一个要备份的文件夹");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				editBackupsPath("");
+				editBackupsPath("",com.xnx3.yunbackups.visualApp.Global.mainJFrame.getX()+50, com.xnx3.yunbackups.visualApp.Global.mainJFrame.getY()+100);
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -81,7 +81,7 @@ public class FileManageJPanel extends JPanel {
 			    
 			    if(col == 1){
 			    	//修改
-			    	editBackupsPath(path); 
+			    	editBackupsPath(path, arg0.getXOnScreen()-550, arg0.getYOnScreen()+10); 
 			    }else if(col == 2){
 			    	//删除
 			    	if(DialogUtil.showConfirmDialog("确定要删除吗?<br/>"+path) - DialogUtil.CONFIRM_YES == 0){
@@ -129,8 +129,22 @@ public class FileManageJPanel extends JPanel {
 		table.setVisible(true);
 	}
 	
-	public void editBackupsPath(String path){
+	/**
+	 * 修改文件路径的输入框
+	 * @param path 默认填写的路径，可为空字符串
+	 * @param xStart 弹出的输入框最左上角 x 值
+	 * @param yStart 弹出的输入框最左上角 y 值
+	 */
+	public void editBackupsPath(String path, int xStart, int yStart){
+		if(xStart < 50){
+			xStart = 50;
+		}
+		if(yStart < 50){
+			yStart = 50;
+		}
+		
 		FileEditJDialog dialog = new FileEditJDialog(path);
+		dialog.setBounds(xStart, yStart, 600, 150);
 		dialog.setModal(true);//设置模式 dialog关闭后才能获取path的值
 		dialog.setVisible(true);
 		System.out.println(dialog.newPath);

@@ -49,6 +49,7 @@ public class FileEditJDialog extends JDialog {
 	public FileEditJDialog(String oldPath) {
 		this.oldPath = oldPath;
 		setBounds(100, 100, 600, 121);
+		setTitle("编辑要备份文件目录");
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
