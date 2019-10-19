@@ -170,10 +170,9 @@ public class FileManageJPanel extends JPanel {
 		}
 		
 		FileEditJDialog dialog = new FileEditJDialog(path);
-		dialog.setBounds(xStart, yStart, 600, 150);
+		dialog.setBounds(xStart, yStart, 600, 120);
 		dialog.setModal(true);//设置模式 dialog关闭后才能获取path的值
 		dialog.setVisible(true);
-		System.out.println(dialog.newPath);
 		if(dialog.newPath != null){
 			//有过改动保存
 			BackupsPath backupsPath = new BackupsPath();
