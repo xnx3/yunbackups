@@ -9,10 +9,17 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import com.xnx3.yunbackups.commandLineApp.Global;
 import com.xnx3.yunbackups.commandLineApp.bean.CloudConfigBean;
 import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
+import com.xnx3.yunbackups.core.util.SystemUtil;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * 华为云配置
@@ -65,6 +72,18 @@ public class HuaWeiConfigJPanel extends JPanel {
 		
 		endPointTextField = new JTextField();
 		endPointTextField.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("点击此处查看详细的设置步骤");
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SystemUtil.openUrl("http://www.leimingyun.com/17825.html");
+			}
+		});
+		lblNewLabel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		lblNewLabel_1.setForeground(Color.BLUE);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -76,23 +95,25 @@ public class HuaWeiConfigJPanel extends JPanel {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(accessKeyIdTextField, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
+									.addComponent(accessKeyIdTextField, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblSecretAccessKey, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(secretAccessKeyTextField, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
+									.addComponent(secretAccessKeyTextField, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblBA, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(bucketNameTextField, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))))
+									.addComponent(bucketNameTextField, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblObsendpoint, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(endPointTextField, GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(105)
+							.addGap(104)
 							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(lblObsendpoint, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(endPointTextField, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)))
+							.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -100,23 +121,25 @@ public class HuaWeiConfigJPanel extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel)
-						.addComponent(accessKeyIdTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+						.addComponent(accessKeyIdTextField, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSecretAccessKey)
-						.addComponent(secretAccessKeyTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblSecretAccessKey, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+						.addComponent(secretAccessKeyTextField, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblBA)
-						.addComponent(bucketNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblBA, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addComponent(bucketNameTextField, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
 					.addGap(14)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(endPointTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblObsendpoint))
-					.addGap(28)
+						.addComponent(endPointTextField, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblObsendpoint, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addGap(42)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(79, Short.MAX_VALUE))
+					.addGap(18)
+					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(43, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 
