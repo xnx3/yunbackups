@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import com.xnx3.yunbackups.visualApp.Global;
 import javax.swing.JTabbedPane;
+import java.awt.Toolkit;
 
 /**
  * 主界面
@@ -38,6 +39,7 @@ public class MainJFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainJFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainJFrame.class.getResource("/res/icon.jpg")));
 		setTitle("yunbackups v"+Global.VERSION +"    云备份软件，保障您的数据安全！");
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
