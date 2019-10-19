@@ -11,8 +11,16 @@ import com.xnx3.yunbackups.core.bean.BackupsPath;
  *
  */
 public class Global {
-	public static final String CONFIG_PATH = SystemUtil.getCurrentDir()+File.separator+"config"+File.separator;	//配置文件所在的文件夹
+	public static final String CONFIG_PATH;	//配置文件所在的文件夹
 	static{
+		//判断当前系统是否是mac
+		String osname = System.getProperty("os.name");
+		if(osname.toLowerCase().indexOf("mac") > -1){
+			//是mac
+			CONFIG_PATH = System.getProperty("user.home")+File.separator+"yunbackups"+File.separator+"config"+File.separator;	//配置文件所在的文件夹
+		}else {
+			CONFIG_PATH = SystemUtil.getCurrentDir()+File.separator+"config"+File.separator;	//配置文件所在的文件夹
+		}
 		//如果配置文件目录不存在，那么自动创建
 		File file = new File(CONFIG_PATH);
 		if(!file.exists()){
