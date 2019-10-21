@@ -3,6 +3,7 @@ package com.xnx3.yunbackups.visualApp.ui.JPanel;
 import java.awt.EventQueue;
 import javax.swing.JPanel;
 import com.xnx3.Lang;
+import com.xnx3.swing.DialogUtil;
 import com.xnx3.yunbackups.core.Global;
 import com.xnx3.yunbackups.core.config.System;
 import javax.swing.GroupLayout;
@@ -157,6 +158,7 @@ public class SystemJPanel extends JPanel {
 				
 				Global.system = system;
 				System.save(system);
+				DialogUtil.showMessageDialog("保存成功！");
 			}
 		});
 		

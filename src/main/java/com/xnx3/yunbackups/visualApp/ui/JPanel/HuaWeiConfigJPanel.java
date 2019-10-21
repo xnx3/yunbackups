@@ -6,6 +6,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import com.xnx3.swing.DialogUtil;
 import com.xnx3.yunbackups.commandLineApp.Global;
 import com.xnx3.yunbackups.commandLineApp.bean.CloudConfigBean;
 import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
@@ -65,6 +67,7 @@ public class HuaWeiConfigJPanel extends JPanel {
 				Global.cloudConfigBean = bean;
 				//保存到本地配置文件
 				HuaweiObsConfig.save(bean);
+				DialogUtil.showMessageDialog("保存成功！");
 			}
 		});
 		

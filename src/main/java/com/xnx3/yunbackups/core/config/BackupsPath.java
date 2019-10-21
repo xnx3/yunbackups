@@ -35,7 +35,6 @@ public class BackupsPath {
 	 */
 	public static Map<String, com.xnx3.yunbackups.core.bean.BackupsPath> read(){
 		Map<String, com.xnx3.yunbackups.core.bean.BackupsPath> map = new HashMap<String, com.xnx3.yunbackups.core.bean.BackupsPath>();
-		
 		String content = FileUtil.read(Global.CONFIG_PATH+"backupsPath.config");
 		if(content == null || content.length() == 0){
 			//第一次用，还没有配置文件

@@ -34,7 +34,7 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 	}
 
 	public void backupsOneFileFinish(ScanTask scanTask, File file, int currentRankNumber) {
-		logBackupsOneFileFinishThread.currentPath = file.getPath()+"<br/>此目录下，已备份"+currentRankNumber+"个文件，还剩"+(scanTask.getScanAccordNumber()-currentRankNumber)+"个文件未备份";
+		logBackupsOneFileFinishThread.currentPath = file.getPath()+"\n此目录下，已备份"+currentRankNumber+"个文件，还剩"+(scanTask.getScanAccordNumber()-currentRankNumber)+"个文件未备份";
 	}
 
 	public void backupsFinish(int allFileNumber, int alreadyScanAccordNumber, long starttime) {
@@ -84,7 +84,7 @@ class LogBackupsOneFileFinishThread extends Thread{
 				e.printStackTrace();
 			}
 			try {
-				Global.logJPanel.currentBackupsFilePathLabel.setText("<html>"+currentPath);
+				Global.logJPanel.currentBackupsFilePathTextarea.setText(currentPath);
 			} catch (Exception e) {
 				System.out.println("ProgressListener 85 line : "+e.getMessage());
 			}

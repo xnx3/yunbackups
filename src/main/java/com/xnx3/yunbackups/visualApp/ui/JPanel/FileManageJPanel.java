@@ -48,7 +48,7 @@ public class FileManageJPanel extends JPanel {
 		
 		JLabel label = new JLabel("       1. 凡是添加进这里面的目录，都会进行自动备份");
 		
-		JLabel label_1 = new JLabel("       2. 添加或修改目录后，重启生效。");
+		JLabel label_1 = new JLabel("       2. 添加或修改目录后，请关闭本软件重新启动！重启生效。");
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
