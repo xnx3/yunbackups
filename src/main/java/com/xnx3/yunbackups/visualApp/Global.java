@@ -24,6 +24,11 @@ public class Global {
 	//图标
 	public static Image image;
 	static{
-		image = Toolkit.getDefaultToolkit().getImage(MainJFrame.class.getResource("/res/icon.png"));
+		try {
+			image = Toolkit.getDefaultToolkit().getImage(Global.class.getResource("/res/icon.png"));
+		} catch (Exception e) {
+			//System.out.println("如果是吧这个包导出来的，加入到其他项目中用，这里会有异常，忽略即可");
+			e.printStackTrace();
+		}
 	}
 }

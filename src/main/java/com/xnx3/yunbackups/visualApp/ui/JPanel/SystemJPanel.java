@@ -316,8 +316,8 @@ public class SystemJPanel extends JPanel {
 		suffixTextArea.setText(suffixStr);
 	
 		String ignoreSuffixStr = "";	//不算多，就不用stringbuffer了
-		for (int i = 0; i < Global.system.getSuffixNameList().size(); i++) {
-			String suffix = Global.system.getSuffixNameList().get(i);
+		for (int i = 0; i < Global.system.getIgnoreSuffixNameList().size(); i++) {
+			String suffix = Global.system.getIgnoreSuffixNameList().get(i);
 			if(suffix.trim().length() > 0){
 				if(ignoreSuffixStr.length() > 0){
 					ignoreSuffixStr = ignoreSuffixStr + ",";

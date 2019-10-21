@@ -62,4 +62,9 @@ public class System {
 		this.hiddenFileScan = hiddenFileScan;
 	}
 
+	public String toString() {
+		return "System [intervalTime=" + intervalTime + ", suffixNameList=" + suffixNameList + ", ignoreSuffixNameList="
+				+ ignoreSuffixNameList + ", fileMaxSize=" + fileMaxSize + ", hiddenFileScan=" + hiddenFileScan + "]";
+	}
+
 }
