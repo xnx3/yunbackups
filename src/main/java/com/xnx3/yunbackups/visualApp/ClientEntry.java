@@ -16,11 +16,13 @@ import org.jvnet.substance.skin.OfficeSilver2007Skin;
 import org.jvnet.substance.skin.RavenSkin;
 import org.jvnet.substance.skin.TwilightSkin;
 
+import com.xnx3.BaseVO;
 import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
 import com.xnx3.yunbackups.core.subsidiary.BackupsPathSynchronizationThread;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.visualApp.action.CreateTray;
 import com.xnx3.yunbackups.visualApp.action.LogJPanelAction;
+import com.xnx3.yunbackups.visualApp.action.Version;
 import com.xnx3.yunbackups.visualApp.ui.MainJFrame;
 import com.xnx3.yunbackups.visualApp.ui.JPanel.FileManageJPanel;
 import com.xnx3.yunbackups.visualApp.ui.JPanel.HuaWeiConfigJPanel;
@@ -66,7 +68,6 @@ public class ClientEntry {
 					 * 2. 最小化卡死  
 					 */
 					Global.mainJFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);           //禁用close功能
-//					Global.mainJFrame.setUndecorated(true);                                           //不显示标题栏,最大化,最小化,退出按钮
 					Global.mainJFrame.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG );//使frame只剩下标题栏
 				}
 				
@@ -86,6 +87,9 @@ public class ClientEntry {
 		
 		//运行辅助线程-自动同步当前备份进度
 		new BackupsPathSynchronizationThread().start();
+		
+		//新版本检测
+		Version.check();
 	}
 	
 	

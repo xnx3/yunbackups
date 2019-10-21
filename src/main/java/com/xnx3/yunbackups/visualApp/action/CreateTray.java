@@ -25,6 +25,10 @@ public class CreateTray {
 	public static TrayIcon tray;
 	
 	public CreateTray(){
+		if(Global.image == null){
+			return;
+		}
+		
 		//添加右键弹出按钮
 		PopupMenu popupMenu=new PopupMenu();
 		java.awt.MenuItem menuItemUI=new java.awt.MenuItem("打开主界面");	//关于按钮
@@ -53,8 +57,15 @@ public class CreateTray {
 		
 		//创建托盘
     	SystemTray sysTray= SystemTray.getSystemTray();// 获得当前操作系统的托盘对象  
+    	//java.awt.Toolkit.getDefaultToolkit().getImage("/res/macicon.jpg")
+//    	Image image = Global.image;
+//    	if(SystemUtil.isMacOS()){
+////    		image = Toolkit.getDefaultToolkit().getImage(CreateTray.class.getClassLoader().getResource("macicon.png"));
+////    		image = java.awt.Toolkit.getDefaultToolkit().getImage("icon.png");
+//    		image = Toolkit.getDefaultToolkit().createImage("/res/icon.png");
+//    		System.out.println(image.getSource());
+//    	}
     	tray = new TrayIcon(Global.image, "云备份软件", popupMenu);
-    	
     	tray.setImageAutoSize(true);
         if(sysTray == null){
         	System.out.println("SystemTray is null !");
@@ -64,17 +75,16 @@ public class CreateTray {
         	System.out.println("tray is null !");
         	return;
         }
-        try {
-			sysTray.add(tray);		//将托盘添加到操作系统的托盘
-		} catch (AWTException e1) {
-			//mac 有这个问题
-			try {
-				java.awt.SystemTray.getSystemTray().add(new java.awt.TrayIcon(java.awt.Toolkit.getDefaultToolkit().getImage("res/icon.png")));
-			} catch (AWTException e3) {
-				// TODO Auto-generated catch block
-				e3.printStackTrace();
-			}
-		}
+        if(SystemTray.isSupported()){
+        	 try {
+     			sysTray.add(tray);		//将托盘添加到操作系统的托盘
+     		} catch (AWTException e1) {
+     			e1.printStackTrace();
+     		}
+        }else{
+        	System.out.println("SystemTray.isSupported() -- false");
+        }
+       
 		
 		//创建托盘完毕后，拿到的tray对象可以进行在创建的托盘上弹出文字提示
 //		tray.displayMessage("标题", "内容", MessageType.INFO);
