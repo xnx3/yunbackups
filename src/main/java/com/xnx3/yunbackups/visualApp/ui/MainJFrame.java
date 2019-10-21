@@ -20,26 +20,10 @@ public class MainJFrame extends JFrame {
 	public JTabbedPane tabbedPane;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainJFrame frame = new MainJFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public MainJFrame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(MainJFrame.class.getResource("/res/icon.jpg")));
+		setIconImage(Global.image);
 		setTitle("yunbackups v"+Global.VERSION +"    云备份软件，保障您的数据安全！");
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

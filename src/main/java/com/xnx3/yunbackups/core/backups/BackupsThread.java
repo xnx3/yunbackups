@@ -56,13 +56,17 @@ public class BackupsThread extends Thread{
 			long starttime = DateUtil.timeForUnix13();	//开始时间记录
 			
 			if(this.progressListener != null){
-				this.progressListener.backupsStart();
+				this.progressListener.backupsBefore();
 			}
 			
 			for(Map.Entry<String, com.xnx3.yunbackups.core.bean.BackupsPath> entry : Global.backupsPathMap.entrySet()){
 				com.xnx3.yunbackups.core.bean.BackupsPath backupsPath = entry.getValue();
 				ScanTask scanTask = new ScanTask(backupsPath);
 				scanTask.setProgressListener(this.progressListener);	//设定监听
+				//ScanTask执行之前监听
+				if(this.progressListener != null){
+					this.progressListener.backupsOnePathBefore(scanTask);
+				}
 				//扫描用户自定义要备份的目录下，有多少可备份文件
 				scanTask.scanFiles();
 				//扫描完成监听

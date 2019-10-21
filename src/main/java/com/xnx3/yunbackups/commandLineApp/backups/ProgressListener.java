@@ -77,7 +77,7 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 		log("本次自动备份完毕！共备份"+alreadyScanAccordNumber+"个文件，耗时"+secend+"秒。正在等待下一次自动扫描备份...");
 	}
 
-	public void backupsStart() {
+	public void backupsBefore() {
 		//开启备份文件已备份到什么成都的刷新线程
 		logBackupsOneFileFinishThread = null;
 		logBackupsOneFileFinishThread = new LogBackupsOneFileFinishThread();
@@ -88,6 +88,15 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 	
 	public static void log(String content){
 		FileUtil.write(Global.LOG_PATH+LOG_NAME, content+"\r\n当前日志更新时间:"+DateUtil.currentDate("yyyy-MM-dd HH:mm:ss")+"\r\n");
+	}
+
+	public void backupsOnePathBefore(ScanTask scanTask) {
+		ProgressListener.scanTask = scanTask;
+		
+		StringBuffer sb = new StringBuffer();
+		//scanTask
+		sb.append("当前准备备份的目录:"+scanTask.getBackupsPath().getPath());
+		log(sb.toString());
 	}
 	
 }

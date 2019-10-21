@@ -10,6 +10,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Cursor;
 
 /**
  * 实时日志
@@ -26,6 +27,7 @@ public class LogJPanel extends JPanel {
 	public JButton runButton;
 	public JLabel statusLabel;
 	private JPanel progressPanel;
+	private JButton exitButton;
 	
 	/**
 	 * Create the panel.
@@ -43,17 +45,26 @@ public class LogJPanel extends JPanel {
 				LogJPanelAction.clickRunButton();
 			}
 		});
+		
+		exitButton = new JButton("退出软件");
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(progressPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
 							.addComponent(runButton, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(statusLabel, GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(exitButton, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(statusLabel, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+						.addComponent(progressPanel, GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -62,10 +73,11 @@ public class LogJPanel extends JPanel {
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(statusLabel, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-						.addComponent(runButton, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(progressPanel, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(48, Short.MAX_VALUE))
+						.addComponent(runButton, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addComponent(exitButton, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(progressPanel, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		
 		JLabel label = new JLabel("本次已扫描文件数量：");
@@ -104,11 +116,11 @@ public class LogJPanel extends JPanel {
 								.addComponent(label, GroupLayout.PREFERRED_SIZE, 180, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_progressPanel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(currentBackupsPathLabel, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+								.addComponent(currentBackupsPathLabel, GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
 								.addGroup(gl_progressPanel.createSequentialGroup()
 									.addGroup(gl_progressPanel.createParallelGroup(Alignment.TRAILING)
-										.addComponent(alreadyScanAccordNumberLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-										.addComponent(allFileNumberLabel, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+										.addComponent(alreadyScanAccordNumberLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+										.addComponent(allFileNumberLabel, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE))
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(gl_progressPanel.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_progressPanel.createSequentialGroup()
@@ -124,7 +136,7 @@ public class LogJPanel extends JPanel {
 						.addGroup(gl_progressPanel.createSequentialGroup()
 							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(currentBackupsFilePathLabel, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)))
+							.addComponent(currentBackupsFilePathLabel, GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		gl_progressPanel.setVerticalGroup(
@@ -152,9 +164,9 @@ public class LogJPanel extends JPanel {
 							.addGroup(gl_progressPanel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(sortTimeLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 								.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))))
-					.addPreferredGap(ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
 					.addGroup(gl_progressPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
 						.addComponent(currentBackupsFilePathLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
@@ -167,5 +179,8 @@ public class LogJPanel extends JPanel {
 	}
 	public JPanel getProgressPanel() {
 		return progressPanel;
+	}
+	public JButton getExitButton() {
+		return exitButton;
 	}
 }

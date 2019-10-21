@@ -13,7 +13,7 @@ public interface ProgressListener {
 	 * 备份开始，跟 {@link #backupsFinish(int, int, long)} 相对。
 	 *  backupsFinish(...) 备份完成后，等待多长时间，便会重新开始备份操作，扫描设定的多个备份目录内，可以进行备份的文件。本接口便是在开始备份，要扫描可备份的文件之前，进行触发
 	 */
-	public void backupsStart();
+	public void backupsBefore();
 	
 	/**
 	 * ScanTask 进行扫描的过程中，当发现一个可备份的文件时，便会触发此方法。
@@ -37,6 +37,13 @@ public interface ProgressListener {
 	 * @param scanTask 当前的扫描任务
 	 */
 	public void sortFinish(ScanTask scanTask);
+	
+	/**
+	 * 开始备份一个用户设定的备份目录时触发。刚开始，都还没有扫描目录内文件之前就会触发。
+	 * <br/>用户可能会设定多个备份目录，这里是每当备份完其中一个备份目录都会触发一次。
+	 * @param scanTask 当前的扫描任务
+	 */
+	public void backupsOnePathBefore(ScanTask scanTask);
 	
 	/**
 	 * 备份完一个用户设定的备份目录时触发。

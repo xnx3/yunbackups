@@ -50,7 +50,7 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 		Global.logJPanel.getProgressPanel().setVisible(false);
 	}
 
-	public void backupsStart() {
+	public void backupsBefore() {
 		Global.logJPanel.getStatusLabel().setText("正在备份过程中...");
 		//显示备份具体进度信息
 		Global.logJPanel.getProgressPanel().setVisible(true);
@@ -59,6 +59,10 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 		logBackupsOneFileFinishThread = null;
 		logBackupsOneFileFinishThread = new LogBackupsOneFileFinishThread();
 		logBackupsOneFileFinishThread.start();
+	}
+
+	public void backupsOnePathBefore(ScanTask scanTask) {
+		Global.logJPanel.currentBackupsPathLabel.setText("<html>"+scanTask.getBackupsPath().getPath());
 	}
 	
 }

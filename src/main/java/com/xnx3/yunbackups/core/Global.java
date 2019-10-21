@@ -14,8 +14,7 @@ public class Global {
 	public static final String CONFIG_PATH;	//配置文件所在的文件夹
 	static{
 		//判断当前系统是否是mac
-		String osname = System.getProperty("os.name");
-		if(osname.toLowerCase().indexOf("mac") > -1){
+		if(com.xnx3.yunbackups.core.util.SystemUtil.isMacOS()){
 			//是mac
 			CONFIG_PATH = System.getProperty("user.home")+File.separator+"yunbackups"+File.separator+"config"+File.separator;	//配置文件所在的文件夹
 		}else {

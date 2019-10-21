@@ -26,6 +26,15 @@ public class SystemUtil extends com.xnx3.SystemUtil{
 		return getOSName().indexOf("window") > -1;
 	}
 	
+	/**
+	 * 获取当前系统是否是 mac
+	 * @return true：是
+	 */
+	public static boolean isMacOS(){
+		return getOSName().indexOf("mac") > -1;
+	}
+	
+	
 	public static void main(String[] args) {
 		System.out.println(getOSName());
 	}
