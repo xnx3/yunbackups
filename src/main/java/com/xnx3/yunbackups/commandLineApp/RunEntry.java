@@ -37,9 +37,6 @@ public class RunEntry {
 		backupsThread.setExceptionListener(new ExceptionListener());
 		//开始执行此线程，开始备份
 		backupsThread.start();
-		
-		//运行辅助线程-自动同步当前备份进度
-		new BackupsPathSynchronizationThread().start();
 	}
 	
 	

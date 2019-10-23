@@ -1,24 +1,13 @@
 package com.xnx3.yunbackups.visualApp;
 
-import java.awt.Toolkit;
 import java.io.IOException;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 import org.jvnet.substance.SubstanceLookAndFeel;
-import org.jvnet.substance.skin.AutumnSkin;
-import org.jvnet.substance.skin.ChallengerDeepSkin;
-import org.jvnet.substance.skin.CremeSkin;
 import org.jvnet.substance.skin.MistSilverSkin;
-import org.jvnet.substance.skin.NebulaSkin;
-import org.jvnet.substance.skin.OfficeSilver2007Skin;
-import org.jvnet.substance.skin.RavenSkin;
-import org.jvnet.substance.skin.TwilightSkin;
-
-import com.xnx3.BaseVO;
 import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
-import com.xnx3.yunbackups.core.subsidiary.BackupsPathSynchronizationThread;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.visualApp.action.CreateTray;
 import com.xnx3.yunbackups.visualApp.action.LogJPanelAction;
@@ -82,14 +71,11 @@ public class ClientEntry {
 			
 		});
 		
-		//创建托盘
-		new CreateTray();
-		
-		//运行辅助线程-自动同步当前备份进度
-		new BackupsPathSynchronizationThread().start();
-		
 		//新版本检测
 		Version.check();
+		
+		//创建托盘
+		new CreateTray();
 	}
 	
 	

@@ -15,7 +15,9 @@ public class BackupsPathSynchronizationThread extends Thread{
 	
 	public void run() {
 		while(true){
-			BackupsPath.save(Global.backupsPathMap);
+			if(Global.backupsPathMap != null){
+				BackupsPath.save(Global.backupsPathMap);
+			}
 			
 			try {
 				Thread.sleep(5*1000);

@@ -8,6 +8,7 @@ import com.xnx3.yunbackups.core.Global;
 import com.xnx3.yunbackups.core.backups.interfaces.ExceptionListener;
 import com.xnx3.yunbackups.core.backups.interfaces.ProgressListener;
 import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
+import com.xnx3.yunbackups.core.subsidiary.BackupsPathSynchronizationThread;
 
 /**
  * 自动备份线程
@@ -18,6 +19,7 @@ public class BackupsThread extends Thread{
 	private StorageInterface storage;	//备份实现接口
 	private ProgressListener progressListener;	//文件扫描备份的进度监听
 	private ExceptionListener exceptionListener;	//异常监听
+	public static BackupsPathSynchronizationThread backupsPathSynchronizationThread;	//每间隔5秒钟，自动保存一次备份进度
 	
 	/**
 	 * 自动备份线程，也就是整个自动备份的核心所在
@@ -26,6 +28,12 @@ public class BackupsThread extends Thread{
 	public BackupsThread(StorageInterface storage) {
 		this.storage = storage;
 		setName("backupsThread");
+		
+		//创建自动保存进度的线程
+		if(backupsPathSynchronizationThread == null){
+			backupsPathSynchronizationThread = new BackupsPathSynchronizationThread();
+			backupsPathSynchronizationThread.start();
+		}
 	}
 	
 	public void setProgressListener(ProgressListener progressListener) {
