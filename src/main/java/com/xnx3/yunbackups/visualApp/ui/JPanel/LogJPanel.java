@@ -5,6 +5,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.visualApp.action.LogJPanelAction;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -14,6 +16,9 @@ import java.awt.Cursor;
 import javax.swing.JTextArea;
 import java.awt.Color;
 import javax.swing.UIManager;
+import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * 实时日志
@@ -31,6 +36,7 @@ public class LogJPanel extends JPanel {
 	private JPanel progressPanel;
 	private JButton exitButton;
 	public JTextArea currentBackupsFilePathTextarea;
+	private JLabel copyrightLabel;
 	
 	/**
 	 * Create the panel.
@@ -55,20 +61,36 @@ public class LogJPanel extends JPanel {
 				System.exit(0);
 			}
 		});
+		
+		copyrightLabel = new JLabel("www.yunbackups.com  ");
+		copyrightLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		copyrightLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		copyrightLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SystemUtil.openUrl("http://www.yunbackups.com");
+			}
+		});
+		copyrightLabel.setVerticalAlignment(SwingConstants.TOP);
+		copyrightLabel.setForeground(Color.MAGENTA);
+		copyrightLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(progressPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(runButton, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(exitButton, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(statusLabel, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))
-					.addContainerGap())
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(progressPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(runButton, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(exitButton, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(statusLabel, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))
+							.addContainerGap())
+						.addComponent(copyrightLabel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -80,7 +102,8 @@ public class LogJPanel extends JPanel {
 						.addComponent(exitButton, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(progressPanel, GroupLayout.PREFERRED_SIZE, 185, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(37, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+					.addComponent(copyrightLabel, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE))
 		);
 		
 		JLabel label = new JLabel("本次已扫描文件数量：");
