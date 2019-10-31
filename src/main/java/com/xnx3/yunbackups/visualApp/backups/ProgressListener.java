@@ -2,6 +2,7 @@ package com.xnx3.yunbackups.visualApp.backups;
 
 import java.io.File;
 import com.xnx3.DateUtil;
+import com.xnx3.exception.NotReturnValueException;
 import com.xnx3.yunbackups.visualApp.Global;
 import com.xnx3.yunbackups.core.backups.ScanTask;
 
@@ -45,7 +46,11 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 		//算出共耗时多少秒
 		int secend = Math.round(usetime / 1000);
 		//更新完毕的状态提示文字
-		Global.logJPanel.statusLabel.setText("本次自动备份完毕！共备份"+alreadyScanAccordNumber+"个文件，耗时"+secend+"秒。等待下次扫描备份...");
+		try {
+			Global.logJPanel.statusLabel.setText("本次自动备份完毕！共备份"+alreadyScanAccordNumber+"个文件，耗时"+secend+"秒。下次扫描备份时间为 "+DateUtil.dateFormat(DateUtil.timeForUnix10()+com.xnx3.yunbackups.core.Global.system.getIntervalTime()*60, "hh:mm"));
+		} catch (NotReturnValueException e) {
+			e.printStackTrace();
+		}
 		//隐藏备份具体进度信息
 		Global.logJPanel.getProgressPanel().setVisible(false);
 	}
