@@ -46,6 +46,21 @@ public class BackupsThread extends Thread{
 
 
 	public void run() {
+		//判断要备份的目录是否为空，backupsPath 为空，用户还没有设置要备份哪个目录
+		if(Global.backupsPathMap == null || Global.backupsPathMap.size() == 0){
+			if(this.exceptionListener != null){
+				this.exceptionListener.runInitializeFailure(1, "开启失败，您还没有设置要备份哪个目录呢。");
+			}
+			return;
+		}
+		if(Global.system == null){
+			if(this.exceptionListener != null){
+				this.exceptionListener.runInitializeFailure(2, "开启失败，系统设置未读取到，您可以重启软件进行尝试");
+			}
+			return;
+		}
+		
+		
 		//判断通信是否正常
 		BaseVO vo = storage.isUsable();
 		if(vo.getResult() - BaseVO.FAILURE == 0){

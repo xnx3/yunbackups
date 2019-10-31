@@ -7,6 +7,7 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.MistSilverSkin;
+import com.xnx3.swing.DialogUtil;
 import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.visualApp.action.CreateTray;
@@ -62,7 +63,14 @@ public class ClientEntry {
 				
 				//判断一下是否设置过备份服务器相关参数，若已经设置了，那么自动运行
 				if(com.xnx3.yunbackups.commandLineApp.Global.cloudConfigBean.getBucketName() != null && com.xnx3.yunbackups.commandLineApp.Global.cloudConfigBean.getBucketName().length() > 0){
-					System.out.println("run...");
+					//判断要备份的目录是否为空，backupsPath 为空，用户还没有设置要备份哪个目录
+					if(com.xnx3.yunbackups.core.Global.backupsPathMap == null || com.xnx3.yunbackups.core.Global.backupsPathMap.size() == 0){
+						return;
+					}
+					if(com.xnx3.yunbackups.core.Global.system == null){
+						return;
+					}
+					
 					LogJPanelAction.clickRunButton();
 				}
 				

@@ -20,4 +20,14 @@ public interface ExceptionListener {
 	 */
 	public void serviceDisabled(String info);
 	
+	/**
+	 * 当点击运行按钮进行运行时，初始化判断设置的一些参数，如果有异常，设置不对的地方，就会终止执行，触发此方法
+	 * @param type 初始化时，出现错误的地方、类型。包含以下：
+	 * 			<ul>
+	 * 				<li>1:要备份的目录为空，backupsPath 为空，用户还没有设置要备份哪个目录</li>
+	 * 				<li>2:开启失败，系统设置未读取到，您可以重启软件进行尝试</li>
+	 * 			</ul>
+	 * @param defaultInfo 默认的错误提示信息，图省事，可以直接吧这个信息展示给用户看。
+	 */
+	public void runInitializeFailure(int type, String defaultInfo);
 }

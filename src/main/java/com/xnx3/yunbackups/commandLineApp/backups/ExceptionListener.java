@@ -33,4 +33,8 @@ public class ExceptionListener implements com.xnx3.yunbackups.core.backups.inter
 		FileUtil.write(Global.LOG_PATH+ERROR_NAME, content+"    "+DateUtil.currentDate("yyyy-MM-dd HH:mm:ss"));
 	}
 
+	public void runInitializeFailure(int type, String defaultInfo) {
+		log(defaultInfo);
+	}
+
 }

@@ -6,6 +6,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import com.xnx3.swing.DialogUtil;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.visualApp.action.LogJPanelAction;
 import java.awt.Font;
@@ -51,6 +52,15 @@ public class LogJPanel extends JPanel {
 		runButton = new JButton("运行");
 		runButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//判断要备份的目录是否为空，backupsPath 为空，用户还没有设置要备份哪个目录
+				if(com.xnx3.yunbackups.core.Global.backupsPathMap == null || com.xnx3.yunbackups.core.Global.backupsPathMap.size() == 0){
+					DialogUtil.showMessageDialog("您还没有设置要备份哪个目录呢");
+					return;
+				}
+				if(com.xnx3.yunbackups.core.Global.system == null){
+					DialogUtil.showMessageDialog("开启失败，系统设置未读取到，您可以重启软件进行尝试");
+					return;
+				}
 				LogJPanelAction.clickRunButton();
 			}
 		});

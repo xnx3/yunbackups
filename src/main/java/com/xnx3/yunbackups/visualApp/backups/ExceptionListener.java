@@ -23,4 +23,9 @@ public class ExceptionListener implements com.xnx3.yunbackups.core.backups.inter
 		CreateTray.showTrayMessage("失败提示", "备份服务器通信失败："+info);
 	}
 
+	public void runInitializeFailure(int type, String defaultInfo) {
+		System.out.println(defaultInfo);
+		CreateTray.showTrayMessage("失败提示",defaultInfo);
+	}
+
 }
