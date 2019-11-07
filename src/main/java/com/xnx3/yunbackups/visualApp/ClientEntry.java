@@ -12,7 +12,7 @@ import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.visualApp.action.CreateTray;
 import com.xnx3.yunbackups.visualApp.action.LogJPanelAction;
-import com.xnx3.yunbackups.visualApp.action.Version;
+import com.xnx3.yunbackups.visualApp.action.VersionCheck;
 import com.xnx3.yunbackups.visualApp.ui.MainJFrame;
 import com.xnx3.yunbackups.visualApp.ui.JPanel.FileManageJPanel;
 import com.xnx3.yunbackups.visualApp.ui.JPanel.HuaWeiConfigJPanel;
@@ -71,7 +71,19 @@ public class ClientEntry {
 						return;
 					}
 					
-					LogJPanelAction.clickRunButton();
+					new Thread(new Runnable() {
+						public void run() {
+							com.xnx3.yunbackups.visualApp.Global.logJPanel.runButton.setVisible(false);
+							com.xnx3.yunbackups.visualApp.Global.logJPanel.statusLabel.setText("初始化中...20秒后开启...");
+							try {
+								Thread.sleep(20000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							LogJPanelAction.clickRunButton();
+						}
+					}).start();
+					
 				}
 				
 				
@@ -80,7 +92,11 @@ public class ClientEntry {
 		});
 		
 		//新版本检测
-		Version.check();
+		new Thread(new Runnable() {
+			public void run() {
+				VersionCheck.check(Global.VERSION_CHECK_URL, Global.VERSION);
+			}
+		}).start();
 		
 		//创建托盘
 		new CreateTray();
