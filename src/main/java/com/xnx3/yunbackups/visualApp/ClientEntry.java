@@ -7,7 +7,6 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.MistSilverSkin;
-import com.xnx3.swing.DialogUtil;
 import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.visualApp.action.CreateTray;
@@ -86,17 +85,11 @@ public class ClientEntry {
 					
 				}
 				
-				
+				//新版本检测
+				VersionCheck.check(Global.VERSION_CHECK_URL, Global.VERSION, "yunbackups");
 			}
 			
 		});
-		
-		//新版本检测
-		new Thread(new Runnable() {
-			public void run() {
-				VersionCheck.check(Global.VERSION_CHECK_URL, Global.VERSION);
-			}
-		}).start();
 		
 		//创建托盘
 		new CreateTray();
