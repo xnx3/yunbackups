@@ -186,6 +186,14 @@ public class ScanTask {
 				return;
 			}
 			
+			//时间判断，当前文件是否是在这个时间之前的，除了判断最小时间之外，这里还要判断最大时间
+			if(file.lastModified() - this.startTime < 0){
+				//正常的，文件创建的时间小于当前的时间
+			}else{
+				//不正常情况
+				return;
+			}
+			
 			//文件大小
 			if(file.length() > Global.system.getFileMaxSize()){
 				//文件大小超过设定的最大大小，忽略
