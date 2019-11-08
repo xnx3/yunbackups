@@ -33,6 +33,7 @@ public class HuaWeiConfigJPanel extends JPanel {
 	private JTextField secretAccessKeyTextField;
 	private JTextField bucketNameTextField;
 	private JTextField endPointTextField;
+	private JLabel setupLabel;
 
 	/**
 	 * Create the panel.
@@ -76,17 +77,17 @@ public class HuaWeiConfigJPanel extends JPanel {
 		endPointTextField = new JTextField();
 		endPointTextField.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("点击此处查看详细的设置步骤");
-		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+		setupLabel = new JLabel("点击此处查看详细的设置步骤");
+		setupLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				SystemUtil.openUrl("http://www.leimingyun.com/17825.html");
+				SystemUtil.openUrl("http://www.yunbackups.com/huaweiobsSetup.html");
 			}
 		});
-		lblNewLabel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblNewLabel_1.setForeground(Color.BLUE);
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		setupLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		setupLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		setupLabel.setForeground(Color.BLUE);
+		setupLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -116,7 +117,7 @@ public class HuaWeiConfigJPanel extends JPanel {
 							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)))
+							.addComponent(setupLabel, GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -141,7 +142,7 @@ public class HuaWeiConfigJPanel extends JPanel {
 					.addGap(42)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addComponent(setupLabel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(43, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
@@ -163,5 +164,8 @@ public class HuaWeiConfigJPanel extends JPanel {
 	}
 	public JTextField getEndPointTextField() {
 		return endPointTextField;
+	}
+	public JLabel getSetupLabel() {
+		return setupLabel;
 	}
 }
