@@ -1,5 +1,7 @@
 package com.xnx3.yunbackups.visualApp;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -7,6 +9,8 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.MistSilverSkin;
+
+import com.xnx3.swing.DialogUtil;
 import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.visualApp.action.CreateTray;
@@ -57,7 +61,25 @@ public class ClientEntry {
 					 * 2. 最小化卡死  
 					 */
 					Global.mainJFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);           //禁用close功能
-					Global.mainJFrame.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG );//使frame只剩下标题栏
+					Global.mainJFrame.getRootPane().setWindowDecorationStyle(JRootPane.PLAIN_DIALOG);//使frame只剩下标题栏
+					Global.mainJFrame.addWindowListener(new WindowListener() {
+						public void windowOpened(WindowEvent e) {
+						}
+						public void windowIconified(WindowEvent e) {
+						}
+						public void windowDeiconified(WindowEvent e) {
+						}
+						public void windowDeactivated(WindowEvent e) {
+						}
+						public void windowClosing(WindowEvent e) {
+							DialogUtil.showMessageDialog("你好，苹果系统不提供关闭功能！<br/>关闭了就没法自动备份了，<br/>您可以本窗口拖一边去就好。");
+						}
+						public void windowClosed(WindowEvent e) {
+						}
+						public void windowActivated(WindowEvent e) {
+						}
+					});
+					
 				}
 				
 				//判断一下是否设置过备份服务器相关参数，若已经设置了，那么自动运行
