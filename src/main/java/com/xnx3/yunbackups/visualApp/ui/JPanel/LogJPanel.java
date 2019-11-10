@@ -34,10 +34,10 @@ public class LogJPanel extends JPanel {
 	public JLabel sortTimeLabel;
 	public JButton runButton;
 	public JLabel statusLabel;
-	private JPanel progressPanel;
-	private JButton exitButton;
+	public JPanel progressPanel;
+	public JButton exitButton;
 	public JTextArea currentBackupsFilePathTextarea;
-	private JLabel copyrightLabel;
+	public JLabel copyrightLabel;
 	
 	/**
 	 * Create the panel.
@@ -220,5 +220,8 @@ public class LogJPanel extends JPanel {
 	}
 	public JButton getExitButton() {
 		return exitButton;
+	}
+	public JLabel getCopyrightLabel() {
+		return copyrightLabel;
 	}
 }

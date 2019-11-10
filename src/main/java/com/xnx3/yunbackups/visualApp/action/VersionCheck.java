@@ -38,6 +38,10 @@ public class VersionCheck {
 			HttpUtil http = new HttpUtil();
 			HttpResponse hr = http.get(versionCheckUrl);
 			String text = hr.getContent();
+			if(hr.getCode() != 200){
+				System.out.println("versionCheck http code : "+hr.getCode());
+				return;
+			}
 			if(text == null){
 				System.out.println("text is null");
 				return;
