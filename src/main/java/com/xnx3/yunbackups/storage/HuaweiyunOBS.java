@@ -2,6 +2,8 @@ package com.xnx3.yunbackups.storage;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.net.UnknownHostException;
+
 import com.obs.services.exception.ObsException;
 import com.xnx3.BaseVO;
 import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
@@ -84,7 +86,7 @@ public class HuaweiyunOBS implements StorageInterface{
 		
 	}
 
-	public BaseVO isUsable() {
+	public BaseVO isUsable() throws UnknownHostException {
 		BaseVO vo = new BaseVO();
 		
 		try {
@@ -92,6 +94,13 @@ public class HuaweiyunOBS implements StorageInterface{
 			getObsHander().putStringFile(bucketName, "yunbackups/usable.test", "this is test file.", "UTF-8");
 			vo.setBaseVO(BaseVO.SUCCESS, "success");
 		} catch (ObsException e) {
+			Throwable throwable = e.getCause();
+			String throwString = throwable.getMessage().toLowerCase();	//全部小写
+			if(throwString.indexOf("java.net.unknownhostexception") > -1){
+				java.net.UnknownHostException host = (UnknownHostException) throwable;
+				throw host;
+			}
+			
 			vo.setBaseVO(BaseVO.FAILURE, e.getMessage());
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {

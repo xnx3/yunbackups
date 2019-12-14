@@ -1,6 +1,7 @@
 package com.xnx3.yunbackups.core.backups;
 
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.Map;
 import com.xnx3.BaseVO;
 import com.xnx3.DateUtil;
@@ -62,15 +63,29 @@ public class BackupsThread extends Thread{
 		
 		
 		//判断通信是否正常
-		BaseVO vo = storage.isUsable();
-		if(vo.getResult() - BaseVO.FAILURE == 0){
-			//通信失败，退出！
-			
-			//异常触发
-			if(this.exceptionListener != null){
-				this.exceptionListener.serviceDisabled(vo.getInfo());
+		boolean serviceSuccess = false;	//若通信正常，此为true
+		while(!serviceSuccess){
+			try {
+				BaseVO vo = storage.isUsable();
+				if(vo.getResult() - BaseVO.FAILURE == 0){
+					//通信失败
+					
+					//异常触发
+					if(this.exceptionListener != null){
+						this.exceptionListener.serviceDisabled(vo.getInfo());
+					}
+					return;	 //退出执行，不是网络问题，那就是参数设置有误，既然参数没有设置好，再尝多少次都是没用的，直接退出线程运行
+				}else{
+					serviceSuccess = true;	//设为true，跳出while循环，进行下一步开始备份
+				}
+			} catch (UnknownHostException e1) {
+				e1.printStackTrace();
+				try {
+					Thread.sleep(5000);	//5秒后重试
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
-			return;
 		}
 		
 		while(true){
