@@ -10,9 +10,7 @@
 
 ## 可视化界面方式使用说明
 #### 1.运行状态
-![avatar](http://baidu.com/pic/doge.png)
-![](https://cdn.weiunity.com/site/341/news/bacbfe659c764ee18d2bc45cbbe1ec88.png)
-
+![](images/yunxingzhuangtai.png)
 软件当前备份的实时状态，是否正在备份、正在备份的目录、当前目录扫描文件的数量及耗时、筛选出要进行备份的文件、数量及耗时、以及筛选完毕后当前备份的进度等。
 软件开启后会自动进行备份，便是会看到当前进度状态。 
 
