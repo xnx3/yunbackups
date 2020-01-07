@@ -9,16 +9,13 @@
 下面就介绍两种运行方式的具体使用步骤：
 
 ## 可视化界面方式使用说明
-#### 运行状态
-
+#### 1. 运行状态
 ![](https://github.com/xnx3/yunbackups/blob/master/images/yunxingzhuangtai.png?raw=true)
-
 软件当前备份的实时状态，是否正在备份、正在备份的目录、当前目录扫描文件的数量及耗时、筛选出要进行备份的文件、数量及耗时、以及筛选完毕后当前备份的进度等。
 软件开启后会自动进行备份，便是会看到当前进度状态。 
 
 #### 2.系统参数
-![](//cdn.weiunity.com/site/341/news/2fe2c942d2644ba9964a616db05690bd.png)
-
+![](https://github.com/xnx3/yunbackups/blob/master/images/xitongcanshu.png?raw=true)
 对软件进行系统性的设置。具体设置项如下：
 自动备份时间间隔，可以设置自动备份完毕后，等待多长时间开始下一次备份，这样软件后台运行过程中，会自动循环备份最新文件。
 最大文件大小，可以设置可备份文件的最大大小，超过这个大小就不会进行备份。例如设置为10MB，那么会自动备份不超过10MB的文件。超过10MB的不会备份。
@@ -27,12 +24,12 @@
 是否备份隐藏文件，如果设置上备份，那么文件属性为隐藏的文件、文件夹也会一起进行备份。
 
 #### 3.备份目录
-![](//cdn.weiunity.com/site/341/news/be74b55967c14b98a4e86e68bfa6fb4c.png)
+![](https://github.com/xnx3/yunbackups/blob/master/images/beifenmulu.png?raw=true)
 可以设定多个目录进行备份。凡事设定好的目录，都会自动进行备份，保障目录内的文件安全。
 
 
 #### 4.华为云配置
-![](//cdn.weiunity.com/site/341/news/7e908263d06c4a9ab05159bb8653af98.png)
+![](https://github.com/xnx3/yunbackups/blob/master/images/huaweiyunconfig.png?raw=true)
 配置华为云的参数，配置好后，将会同步本地设置的备份目录的文件，自动同步到华为云上面进行备份。
 
 ## 命令行方式使用说明
