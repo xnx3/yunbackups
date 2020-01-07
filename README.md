@@ -2,30 +2,6 @@
 
 云备份软件，英文名 yunbackups ，采用开放式架构，可以有用户自由扩展开发对接自己的存储系统，无任何限制！用户可以将自己电脑、或手机、或服务器等，将任何来源的文件，备份到任何地方！
 
-# 代码的结构
-### com.xnx3.yunbackups.core 
-自动备份的核心代码所在，拥有无限扩展的可能。
-
-1. 可扩展存储方式 ，用户可以根据自己喜好，来实现相应接口方法，定做自己的备份服务器，而不在仅仅只是局限于云服务、FTP等方式。
-2. 可扩展其他的存储方式进行备份。 com.xnx3.yunbackups.core.backups.interfaces.StorageInterface
-可扩展进度监听，用户可以根据自己需求，监听当前进度，用来进行日志记录，或实时显示。 com.xnx3.yunbackups.core.backups.interfaces.ProgressListener
-3. 可扩展异常监听。备份过程中出现什么异常情况，比如备份服务器连接不上无法通信了、或者断网了等，都可以通过异常监听进行捕获，自由定制。 com.xnx3.yunbackups.core.backups.interfaces.ExceptionListener
-
-### com.xnx3.yunbackups.storage 
-此包下，用来实现存储的方式。比如FTP存储、阿里云OSS存储、华为云OBS存储等。可以任意扩展。
-
-1. com.xnx3.yunbackups.storage.HuaweiyunOBS 以华为云OBS作为备份存储方式
-2. com.xnx3.yunbackups.storage.AliyunOSS 以阿里云OSS作为备份存储方式
-3. com.xnx3.yunbackups.storage.FTP 以FTP作为备份存储对接方式 
-
-### com.xnx3.yunbackups.commandLineApp 
-以命令行方式运行云备份软件，可用于linux服务器，或对资源占用要求低的场景。 此种方式运行，实时日志在当前文件夹下的log文件夹中查看。
-1. progress.log  实时进度日志，记录最后一次的日志记录，也就是扩展了进度监听接口 com.xnx3.yunbackups.core.backups.interfaces.ProgressListener 所记录的日志 
-2. exception.log  记录异常日志，也就是扩展了异常监听接口 com.xnx3.yunbackups.core.backups.interfaces.ExceptionListener 所记录的日志。如果没有异常，则不会生成这个文件。 
-### com.xnx3.yunbackups.visualApp 
-可视化界面方式运行云备份软件。以用户比较接受比较友好的可视化界面的方式来运行，比如配置备份文件最大的大小、是否备份隐藏文件、以及配置备份的目录等，都是在可视化状态下进行设置。
- 另外 com.xnx3.yunbackups.commandLineApp 命令行运行的前提，也是要运行可视化界面的方式，先配置好，再进行命令行方式运行。
-
 
 # 云备份软件分两种形式运行
 1. 适用于电脑小白，双击即可运行，有可视化界面，可以通过可视化界面进行方便的配置。另外实时运行日志也会在可视化界面中显示。
@@ -35,10 +11,12 @@
 ## 可视化界面方式使用说明
  
 #### 1.运行状态
+![](//cdn.weiunity.com/site/341/news/07b0ee51789246d7a945db530990fea8.png)
 软件当前备份的实时状态，是否正在备份、正在备份的目录、当前目录扫描文件的数量及耗时、筛选出要进行备份的文件、数量及耗时、以及筛选完毕后当前备份的进度等。
 软件开启后会自动进行备份，便是会看到当前进度状态。 
 
 #### 2.系统参数
+![](//cdn.weiunity.com/site/341/news/2fe2c942d2644ba9964a616db05690bd.png)
 对软件进行系统性的设置。具体设置项如下：
 自动备份时间间隔，可以设置自动备份完毕后，等待多长时间开始下一次备份，这样软件后台运行过程中，会自动循环备份最新文件。
 最大文件大小，可以设置可备份文件的最大大小，超过这个大小就不会进行备份。例如设置为10MB，那么会自动备份不超过10MB的文件。超过10MB的不会备份。
@@ -47,20 +25,29 @@
 是否备份隐藏文件，如果设置上备份，那么文件属性为隐藏的文件、文件夹也会一起进行备份。
 
 #### 3.备份目录
+![](//cdn.weiunity.com/site/341/news/be74b55967c14b98a4e86e68bfa6fb4c.png)
 可以设定多个目录进行备份。凡事设定好的目录，都会自动进行备份，保障目录内的文件安全。
 
 
 #### 4.华为云配置
+![](//cdn.weiunity.com/site/341/news/7e908263d06c4a9ab05159bb8653af98.png)
 配置华为云的参数，配置好后，将会同步本地设置的备份目录的文件，自动同步到华为云上面进行备份。
 
 ## 命令行方式使用说明
 
 命令行方式，适用于对资源占用要求极低的场景，不想让云备份软件占用太大的cpu。命令行方式运行，对CPU占用极低，甚至可以达到忽略的程度。
 以命令行方式运行，需要配置 /config/  目录下的配置文件。这里说明一下其中的配置文件：
-#### system.config	系统配置，比如配置没间隔多长时间自动备份、备份什么后缀的文件、是否备份隐藏文件等。
-#### backupsPath.config		备份的目录，要对那几个目录进行自动备份 storage_huaweiobs.config		备份到哪里。这个配置文件是将本地文件自动备份到华为云上。
-#### storage_aliyunoss.config		备份到阿里云上。
-#### storage_ftp.config		备份到FTP上。通过提供的ftp地址、账号、密码进行备份。
+
+#### system.config	
+系统配置，比如配置没间隔多长时间自动备份、备份什么后缀的文件、是否备份隐藏文件等。
+#### backupsPath.config		
+备份的目录，要对那几个目录进行自动备份 
+#### storage_huaweiobs.config		
+备份到哪里。这个配置文件是将本地文件自动备份到华为云上。
+#### storage_aliyunoss.config		
+备份到阿里云上。
+#### storage_ftp.config		
+备份到FTP上。通过提供的ftp地址、账号、密码进行备份。
 
 其中  system.config  、 backupsPath.config  这两个是必须配置的，  storage_huaweiobs.config 是备份服务器的配置，如果你要将本地文件自动备份到华为云上，那么就要配置好这个配置文件。如果你要将本地文件自动备份到阿里云上，那么你需要配置 storage_aliyunoss.config 这个配置文件。
 备份服务器的配置文件，前缀都是以 storage_ 开头。
@@ -157,3 +144,29 @@ path : 备份的目录，一定填写要备份目录的绝对路径。
     "secretAccessKey":"d8GbpsKDy7QG5L........."
 }
 ````
+
+
+# 代码的结构
+### com.xnx3.yunbackups.core 
+自动备份的核心代码所在，拥有无限扩展的可能。
+
+1. 可扩展存储方式 ，用户可以根据自己喜好，来实现相应接口方法，定做自己的备份服务器，而不在仅仅只是局限于云服务、FTP等方式。
+2. 可扩展其他的存储方式进行备份。 com.xnx3.yunbackups.core.backups.interfaces.StorageInterface
+可扩展进度监听，用户可以根据自己需求，监听当前进度，用来进行日志记录，或实时显示。 com.xnx3.yunbackups.core.backups.interfaces.ProgressListener
+3. 可扩展异常监听。备份过程中出现什么异常情况，比如备份服务器连接不上无法通信了、或者断网了等，都可以通过异常监听进行捕获，自由定制。 com.xnx3.yunbackups.core.backups.interfaces.ExceptionListener
+
+### com.xnx3.yunbackups.storage 
+此包下，用来实现存储的方式。比如FTP存储、阿里云OSS存储、华为云OBS存储等。可以任意扩展。
+
+1. com.xnx3.yunbackups.storage.HuaweiyunOBS 以华为云OBS作为备份存储方式
+2. com.xnx3.yunbackups.storage.AliyunOSS 以阿里云OSS作为备份存储方式
+3. com.xnx3.yunbackups.storage.FTP 以FTP作为备份存储对接方式 
+
+### com.xnx3.yunbackups.commandLineApp 
+以命令行方式运行云备份软件，可用于linux服务器，或对资源占用要求低的场景。 此种方式运行，实时日志在当前文件夹下的log文件夹中查看。
+1. progress.log  实时进度日志，记录最后一次的日志记录，也就是扩展了进度监听接口 com.xnx3.yunbackups.core.backups.interfaces.ProgressListener 所记录的日志 
+2. exception.log  记录异常日志，也就是扩展了异常监听接口 com.xnx3.yunbackups.core.backups.interfaces.ExceptionListener 所记录的日志。如果没有异常，则不会生成这个文件。 
+### com.xnx3.yunbackups.visualApp 
+可视化界面方式运行云备份软件。以用户比较接受比较友好的可视化界面的方式来运行，比如配置备份文件最大的大小、是否备份隐藏文件、以及配置备份的目录等，都是在可视化状态下进行设置。
+ 另外 com.xnx3.yunbackups.commandLineApp 命令行运行的前提，也是要运行可视化界面的方式，先配置好，再进行命令行方式运行。
+
