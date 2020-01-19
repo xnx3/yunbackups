@@ -69,7 +69,7 @@ public class HuaWeiJPanel extends JPanel {
 				map.put("accessKeyId", accessKeyIdTextField.getText().trim());
 				map.put("secretAccessKey", secretAccessKeyTextField.getText().trim());
 				map.put("bucketName", bucketNameTextField.getText().trim());
-				map.put("endPoint", endPointTextField.getText().trim());
+				map.put("endpoint", endPointTextField.getText().trim());
 				
 				//测试是否能连接通
 				StorageInterface storageInterface = new HuaweiyunOBS(accessKeyIdTextField.getText().trim(), secretAccessKeyTextField.getText().trim(), endPointTextField.getText().trim(), bucketNameTextField.getText().trim());
