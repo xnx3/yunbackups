@@ -26,30 +26,45 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 		  <artifactId>xnx3-util</artifactId>
 		  <version>1.0.0</version>
 		</dependency>
-	
 		<dependency>
 		  <groupId>com.xnx3.swing</groupId>
 		  <artifactId>xnx3-swing</artifactId>
 		  <version>1.0</version>
 		</dependency>
-	
 		<dependency>
 		  <groupId>com.xnx3.json</groupId>
 		  <artifactId>json</artifactId>
 		  <version>1.0</version>
 		</dependency>
+		<!-- 本地jar包 -->
+        <dependency> 
+	        <groupId>com.xnx3</groupId>  
+	        <artifactId>xnx3</artifactId>  
+	        <version>1.0</version>  
+	        <scope>system</scope>  
+    		<systemPath>${project.basedir}/lib/xnx3-2.2.jar</systemPath>  
+	    </dependency>
+		
 		<dependency>
 		    <groupId>org.java.net.substance</groupId>
 		    <artifactId>substance</artifactId>
 		    <version>5.3</version>
 		</dependency>
-                        
+		
+		<!-- 华为云obs -->
 		<dependency>
 			<groupId>com.huaweicloud</groupId>
 			<artifactId>esdk-obs-java</artifactId>
 			<version>3.19.5</version>
 		</dependency>                     
-                                    
+		
+		<!-- sftp -->
+		<dependency>
+			<groupId>org.glassfish.external</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.56</version>
+		</dependency>
+		
     </dependencies>
 
 <build>

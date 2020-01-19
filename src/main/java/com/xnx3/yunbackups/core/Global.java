@@ -38,4 +38,10 @@ public class Global {
 	static{
 		backupsPathMap = com.xnx3.yunbackups.core.config.BackupsPath.read();
 	}
+	
+	//storage配置的一些参数。持久缓存。华为云、sftp等配置都是存在于这里。其中 key:storage 这个是都有的，用于判断当前用的是哪种存储方式，如 huaweiobs、 sftp
+	public static Map<String, String> storageConfigMap;
+	static{
+		storageConfigMap = com.xnx3.yunbackups.core.config.StorageConfig.read();
+	}
 }

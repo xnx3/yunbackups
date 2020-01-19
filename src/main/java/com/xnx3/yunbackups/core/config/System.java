@@ -76,6 +76,13 @@ public class System {
 					system.setHiddenFileScan(JSONUtil.getString(json, "hiddenFileScan").equalsIgnoreCase("true"));
 				}
 				
+				if(json.get("storage") != null){
+					system.setStorage(JSONUtil.getString(json, "storage"));
+				}else{
+					//默认赋予huaweiobs，以适应1.1版本
+					system.setStorage("huaweiobs");
+				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -9,18 +9,20 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import org.jvnet.substance.skin.MistSilverSkin;
-
 import com.xnx3.swing.DialogUtil;
-import com.xnx3.yunbackups.commandLineApp.config.HuaweiObsConfig;
+import com.xnx3.yunbackups.core.config.StorageConfig;
+import com.xnx3.yunbackups.core.util.BackupsUtil;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.visualApp.action.CreateTray;
 import com.xnx3.yunbackups.visualApp.action.LogJPanelAction;
 import com.xnx3.yunbackups.visualApp.action.VersionCheck;
 import com.xnx3.yunbackups.visualApp.ui.MainJFrame;
 import com.xnx3.yunbackups.visualApp.ui.JPanel.FileManageJPanel;
-import com.xnx3.yunbackups.visualApp.ui.JPanel.HuaWeiConfigJPanel;
 import com.xnx3.yunbackups.visualApp.ui.JPanel.LogJPanel;
+import com.xnx3.yunbackups.visualApp.ui.JPanel.StorageJPanel;
 import com.xnx3.yunbackups.visualApp.ui.JPanel.SystemJPanel;
+import com.xnx3.yunbackups.visualApp.ui.JPanel.storage.HuaWeiJPanel;
+import com.xnx3.yunbackups.visualApp.ui.JPanel.storage.SftpJPanel;
 
 /**
  * 云客户端的运行入口
@@ -43,16 +45,25 @@ public class ClientEntry {
 				}
 				Global.logJPanel = new LogJPanel();
 				
-				//加载云端配置参数
-				com.xnx3.yunbackups.commandLineApp.Global.cloudConfigBean = HuaweiObsConfig.read();
-				
 				Global.mainJFrame = new MainJFrame();
 				Global.mainJFrame.setSize(700, 540);
 				Global.mainJFrame.tabbedPane.addTab("运行状态", Global.logJPanel);
 				Global.mainJFrame.tabbedPane.addTab("系统参数", new SystemJPanel());
 				Global.mainJFrame.tabbedPane.addTab("备份目录", new FileManageJPanel());
-				Global.mainJFrame.tabbedPane.addTab("华为云配置", new HuaWeiConfigJPanel());
+				
+				StorageJPanel storageJPanel = new StorageJPanel();
+				storageJPanel.getTabbedPane().addTab("华为云OBS", new HuaWeiJPanel());
+				storageJPanel.getTabbedPane().addTab("SFTP", new SftpJPanel());
+				if(com.xnx3.yunbackups.core.Global.system.getStorage().equals("sftp")){
+					storageJPanel.getTabbedPane().setSelectedIndex(1);
+				}else{
+					//默认选中华为云，兼容1.1版本
+					storageJPanel.getTabbedPane().setSelectedIndex(0);
+				}
+				
+				Global.mainJFrame.tabbedPane.addTab("备份存储到哪", storageJPanel);
 				Global.mainJFrame.setVisible(true);
+				
 				
 				if(SystemUtil.isMacOS()){
 					/*
@@ -82,8 +93,8 @@ public class ClientEntry {
 					
 				}
 				
-				//判断一下是否设置过备份服务器相关参数，若已经设置了，那么自动运行
-				if(com.xnx3.yunbackups.commandLineApp.Global.cloudConfigBean.getBucketName() != null && com.xnx3.yunbackups.commandLineApp.Global.cloudConfigBean.getBucketName().length() > 0){
+				if(BackupsUtil.generateBackupsThread() != null){
+					//具备开启直接运行的条件
 					//判断要备份的目录是否为空，backupsPath 为空，用户还没有设置要备份哪个目录
 					if(com.xnx3.yunbackups.core.Global.backupsPathMap == null || com.xnx3.yunbackups.core.Global.backupsPathMap.size() == 0){
 						return;
@@ -91,11 +102,10 @@ public class ClientEntry {
 					if(com.xnx3.yunbackups.core.Global.system == null){
 						return;
 					}
-					
+					com.xnx3.yunbackups.visualApp.Global.logJPanel.runButton.setVisible(false);
+					com.xnx3.yunbackups.visualApp.Global.logJPanel.statusLabel.setText("初始化中...20秒后开启...");
 					new Thread(new Runnable() {
 						public void run() {
-							com.xnx3.yunbackups.visualApp.Global.logJPanel.runButton.setVisible(false);
-							com.xnx3.yunbackups.visualApp.Global.logJPanel.statusLabel.setText("初始化中...20秒后开启...");
 							try {
 								Thread.sleep(20000);
 							} catch (InterruptedException e) {
@@ -104,7 +114,6 @@ public class ClientEntry {
 							LogJPanelAction.clickRunButton();
 						}
 					}).start();
-					
 				}
 				
 				//新版本检测

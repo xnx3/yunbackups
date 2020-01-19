@@ -17,6 +17,7 @@ public class System {
 	private List<String> ignoreSuffixNameList;	//忽略的后缀名，在这里面的后缀名，不会进行备份。全小写，格式如 png、 jpg 
 	private long fileMaxSize;	//允许备份的文件最大大小。单位是字节(B)
 	private boolean hiddenFileScan=false;	//是否扫描备份隐藏的文件或文件夹，true：是，false：不扫描(那也就是不备份了)
+	private String storage;		//备份方式，如 sftp 、 huaweiobs
 	
 	public System() {
 		this.intervalTime = 60;	//默认1小时
@@ -62,9 +63,21 @@ public class System {
 		this.hiddenFileScan = hiddenFileScan;
 	}
 
-	public String toString() {
-		return "System [intervalTime=" + intervalTime + ", suffixNameList=" + suffixNameList + ", ignoreSuffixNameList="
-				+ ignoreSuffixNameList + ", fileMaxSize=" + fileMaxSize + ", hiddenFileScan=" + hiddenFileScan + "]";
+		
+	public String getStorage() {
+		return storage;
 	}
 
+	public void setStorage(String storage) {
+		this.storage = storage;
+	}
+
+	@Override
+	public String toString() {
+		return "System [intervalTime=" + intervalTime + ", suffixNameList=" + suffixNameList + ", ignoreSuffixNameList="
+				+ ignoreSuffixNameList + ", fileMaxSize=" + fileMaxSize + ", hiddenFileScan=" + hiddenFileScan
+				+ ", storage=" + storage + "]";
+	}
+
+	
 }
