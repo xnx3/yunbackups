@@ -79,9 +79,13 @@ public class BackupsThread extends Thread{
 					serviceSuccess = true;	//设为true，跳出while循环，进行下一步开始备份
 				}
 			} catch (UnknownHostException e1) {
+				//异常触发
+				if(this.exceptionListener != null){
+					this.exceptionListener.unknownHostException(e1);
+				}
 				e1.printStackTrace();
 				try {
-					Thread.sleep(5000);	//5秒后重试
+					Thread.sleep(30000);	//30秒后重试
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

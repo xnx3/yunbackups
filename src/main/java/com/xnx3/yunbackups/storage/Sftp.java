@@ -3,10 +3,14 @@ package com.xnx3.yunbackups.storage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.net.UnknownHostException;
+import java.util.Properties;
+import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
 import com.xnx3.BaseVO;
-import com.xnx3.net.SFTPUtil;
 import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
 
 /**
@@ -15,11 +19,13 @@ import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
  *
  */
 public class Sftp implements StorageInterface {
-	SFTPUtil sftp;
 	private String host;		//主机，传入如 10.0.0.1
 	private String username;	//登录用户名，如 root
 	private String password;	//登录密码
 	
+	private int port = 22;
+    private ChannelSftp sftp = null;
+    
 	/**
 	 * 
 	 * @param host 主机，传入如 10.0.0.1
@@ -27,7 +33,6 @@ public class Sftp implements StorageInterface {
 	 * @param password 登录密码
 	 */
 	public Sftp(String host, String username, String password) {
-		sftp = new SFTPUtil();
 		this.host = host;
 		this.username = username;
 		this.password = password;
@@ -36,25 +41,34 @@ public class Sftp implements StorageInterface {
 	/**
 	 * 获取当前可操作的SFTP对象
 	 * @return {@link ChannelSftp}
+	 * @throws JSchException 
 	 */
-	public ChannelSftp getSftp() throws UnknownHostException{
-		if(this.sftp.getSftp() == null || !this.sftp.getSftp().isConnected()){
+	public ChannelSftp getSftp() throws UnknownHostException, JSchException{
+		if(this.sftp == null || !this.sftp.isConnected()){
 			//如果没有建立连接，那么重新建立连接
 			reconnection();
 		}
 		
-		return this.sftp.getSftp();
+		return this.sftp;
 	}
 	
 	/**
 	 * sftp重新建立连接。
 	 * 第一次用建立连接，或者超时了重新建立连接
+	 * @throws JSchException 
 	 */
-	public void reconnection() throws UnknownHostException{
-		sftp.setHost(host);
-		sftp.setUsername(username);
-		sftp.setPassword(password);
-		sftp.connect();
+	public void reconnection() throws UnknownHostException, JSchException{
+        JSch jsch = new JSch();
+        jsch.getSession(username, host, port);
+        Session sshSession = jsch.getSession(username, host, port);
+        sshSession.setPassword(password);
+        Properties sshConfig = new Properties();
+        sshConfig.put("StrictHostKeyChecking", "no");
+        sshSession.setConfig(sshConfig);
+        sshSession.connect();
+        Channel channel = sshSession.openChannel("sftp");
+        channel.connect();
+        sftp = (ChannelSftp) channel;
 	}
 	
 	/**
@@ -82,8 +96,9 @@ public class Sftp implements StorageInterface {
 	/**
 	 * 创建目录
 	 * @param path 要创建的目录。传入如 /user/apple/yunbackups/1.txt 则会创建 user/apple/yunbackups 这个目录
+	 * @throws JSchException 
 	 */
-	public void createPath(String path) throws UnknownHostException{
+	public void createPath(String path) throws UnknownHostException, JSchException{
 		int lastIndex = path.lastIndexOf("/");
 		if(lastIndex == -1){
 			return;
@@ -107,13 +122,25 @@ public class Sftp implements StorageInterface {
 	
 	public BaseVO isUsable() throws UnknownHostException{
 		//上传一个对象，看是否能上传成功，从而判断当前storage是否可用。
-		if(getSftp().isConnected()){
-			try {
-				createPath("yunbackups/usable.test");
-				getSftp().put(new ByteArrayInputStream("ceshiaa".getBytes()), "yunbackups/usable.test");
-			} catch (SftpException e) {
-				e.printStackTrace();
-				return BaseVO.failure("failure");
+		try {
+			if(getSftp().isConnected()){
+				try {
+					createPath("yunbackups/usable.test");
+					getSftp().put(new ByteArrayInputStream("ceshiaa".getBytes()), "yunbackups/usable.test");
+				} catch (SftpException e) {
+					e.printStackTrace();
+					return BaseVO.failure("failure");
+				}
+			}
+		} catch (JSchException e) {
+			e.printStackTrace();
+			//将其转化为小写，去空格
+			String message = e.getMessage().replaceAll(" ", "").toLowerCase(); 
+			System.out.println(message);
+			if(message.equals("authfail")){
+				return BaseVO.failure("Auth fail");
+			}else if (message.equals("java.net.socketexception:networkisunreachable(connectfailed)")) {
+				throw new java.net.UnknownHostException(this.host);
 			}
 		}
 		
@@ -125,19 +152,24 @@ public class Sftp implements StorageInterface {
 			return;
 		}
 		String sftpPath = getPath(file.getAbsolutePath());	//上传到sftp的path
-		createPath(sftpPath);
+		try {
+			createPath(sftpPath);
+		} catch (JSchException e1) {
+			e1.printStackTrace();
+		}
 		try {
 			getSftp().put(file.getAbsolutePath(), sftpPath);
 		} catch (SftpException e) {
 			e.printStackTrace();
+		} catch (JSchException e) {
+			e.printStackTrace();
 		}
 	}
 	
-	
 	public static void main(String[] args) throws SftpException, UnknownHostException, IllegalArgumentException {
-		Sftp sftp = new Sftp("112.126.62.205", "root", "123123qQ");
-		sftp.isUsable();
-		sftp.backups(new File("/Users/apple/Downloads/1.png"));
+		Sftp sftp = new Sftp("192.168.1.1", "root", "123123qQ");
+		System.out.println(sftp.isUsable().getResult());
+//		sftp.backups(new File("/Users/apple/Downloads/1.png"));
 		
 	}
 }

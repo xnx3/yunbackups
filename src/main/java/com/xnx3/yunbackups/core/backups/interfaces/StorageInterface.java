@@ -19,7 +19,7 @@ public interface StorageInterface {
 	 * 			<li>result = BaseVO.SUCCESS ，可用，正常通信，可以正常进行备份操作</li>
 	 * 			<li>result = BaseVO.FAILURE ，不可用，通信失败，不能进行备份！这是 getInfo() 可获取失败的具体原因。</li>
 	 * 		</ul>
-	 * @throws UnknownHostException 网络异常，如当前电脑刚开开，wifi还没联上
+	 * @throws UnknownHostException 网络异常，如当前电脑刚开开，wifi还没联上。一定要抛出网络异常的情况，程序如果遇到了网络异常，会延迟等待后重试
 	 */
 	public BaseVO isUsable() throws UnknownHostException;
 	

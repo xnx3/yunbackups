@@ -36,14 +36,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 		  <artifactId>json</artifactId>
 		  <version>1.0</version>
 		</dependency>
-		<!-- 本地jar包 -->
-        <dependency> 
-	        <groupId>com.xnx3</groupId>  
-	        <artifactId>xnx3</artifactId>  
-	        <version>1.0</version>  
-	        <scope>system</scope>  
-    		<systemPath>${project.basedir}/lib/xnx3-2.2.jar</systemPath>  
-	    </dependency>
 		
 		<dependency>
 		    <groupId>org.java.net.substance</groupId>
