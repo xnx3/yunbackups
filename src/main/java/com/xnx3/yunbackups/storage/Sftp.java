@@ -141,6 +141,8 @@ public class Sftp implements StorageInterface {
 				return BaseVO.failure("Auth fail");
 			}else if (message.equals("java.net.socketexception:networkisunreachable(connectfailed)")) {
 				throw new java.net.UnknownHostException(this.host);
+			}else if(message.equals("java.net.connectexception:connectionrefused(connectionrefused)")){
+				throw new java.net.UnknownHostException(this.host);
 			}
 		}
 		

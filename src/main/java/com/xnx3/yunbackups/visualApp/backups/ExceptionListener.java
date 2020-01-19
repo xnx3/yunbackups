@@ -14,8 +14,8 @@ public class ExceptionListener implements com.xnx3.yunbackups.core.backups.inter
 
 	public int unknownHostException(UnknownHostException e) {
 		System.out.println("断网了。。");
-		Global.logJPanel.statusLabel.setText("当前网络中断，等待30秒后再次尝试...");
-		CreateTray.showTrayMessage("失败提示", "当前网络中断，等待30秒后再次尝试...");
+		Global.logJPanel.statusLabel.setText("<html>网络连接异常:"+e.getMessage()+"，等待30秒后再次尝试...");
+		CreateTray.showTrayMessage("失败提示", "网络连接异常，等待30秒后再次尝试...");
 		
 		//延迟等待30秒
 		return 30*1000;
