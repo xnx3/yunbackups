@@ -95,10 +95,12 @@ public class HuaweiyunOBS implements StorageInterface{
 			vo.setBaseVO(BaseVO.SUCCESS, "success");
 		} catch (ObsException e) {
 			Throwable throwable = e.getCause();
-			String throwString = throwable.getMessage().toLowerCase();	//全部小写
-			if(throwString.indexOf("java.net.unknownhostexception") > -1){
-				java.net.UnknownHostException host = (UnknownHostException) throwable;
-				throw host;
+			if(throwable != null) {
+				String throwString = throwable.getMessage().toLowerCase();	//全部小写
+				if(throwString.indexOf("java.net.unknownhostexception") > -1){
+					java.net.UnknownHostException host = (UnknownHostException) throwable;
+					throw host;
+				}
 			}
 			
 			vo.setBaseVO(BaseVO.FAILURE, e.getMessage());
