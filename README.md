@@ -7,7 +7,7 @@ yunbackups 云备份软件，纯Java编写，提供命令行方式、以及可�
 
 ## 软件界面
 <figure class="third">
-    <img src="images/yunxingzhuangtai.png" width="400"/><img src="images/xitongcanshu.png" width="400"/><img src="images/beifenmulu.png" width="400"/>
+    <img src="images/yunxingzhuangtai.png" width="300"/><img src="images/xitongcanshu.png" width="300"/><img src="images/beifenmulu.png" width="300"/><img src="images/huaweiyunconfig.png" width="300"/>
 </figure>
 
 #### 1. 运行状态
