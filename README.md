@@ -6,7 +6,7 @@ yunbackups 云备份软件，纯Java编写，提供命令行方式、以及可�
 [![Mac](images/download_mac.png)](http://down.leimingyun.com/yunbackups/yunbackups.dmg)
 
 ## 软件界面
-<figure class="third">
+<figure class="two">
     <img src="images/yunxingzhuangtai.png" width="300"/><img src="images/xitongcanshu.png" width="300"/><img src="images/beifenmulu.png" width="300"/><img src="images/huaweiyunconfig.png" width="300"/>
 </figure>
 
