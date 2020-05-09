@@ -22,6 +22,7 @@ public class System {
 	public System() {
 		this.intervalTime = 60;	//默认1小时
 		this.fileMaxSize = 524288000;	//默认 500MB
+		this.storage = "huaweiobs";	//默认华为obs，兼容1.1版本，不至于升级后，配置丢了
 	}
 	
 	public int getIntervalTime() {

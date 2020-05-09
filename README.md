@@ -12,6 +12,7 @@ yunbackups 云备份软件，纯Java编写，提供命令行方式、以及可�
 1. 可设置不备份的文件后缀名，若设置，则忽略这个后缀名的文件不备份
 1. 可设置是否备份隐藏的文件
 1. 可实时查看当前运行的状态，备份进度情况
+1. 可自定义将文件备份到华为云OBS、还是自建ftp服务器
 
 ## 软件下载使用
 [![Windows 64位](images/download_windows_64.png)](http://down.leimingyun.com/yunbackups/yunbackups_windows_64.zip)
