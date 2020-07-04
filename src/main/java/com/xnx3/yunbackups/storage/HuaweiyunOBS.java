@@ -10,6 +10,8 @@ import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.storage.huawei.OBSHandler;
 
+import net.sf.json.JSONObject;
+
 /**
  * 通过华为云 OBS备份同步 
  * @author 管雷鸣
@@ -100,6 +102,26 @@ public class HuaweiyunOBS implements StorageInterface{
 				if(throwString.indexOf("java.net.unknownhostexception") > -1){
 					java.net.UnknownHostException host = (UnknownHostException) throwable;
 					throw host;
+				}
+			}else{
+				String code = e.getErrorCode();
+				if(code != null){
+					if(code.equalsIgnoreCase("InvalidAccessKeyId")){
+						//Secret Access Key 错误
+						vo.setBaseVO(BaseVO.FAILURE, "Access Key Id 错误，不存在");
+						return vo;
+					}
+					if(code.equalsIgnoreCase("SignatureDoesNotMatch")){
+						//Secret Access Key 错误
+						vo.setBaseVO(BaseVO.FAILURE, "Secret Access Key 错误");
+						return vo;
+					}
+				}
+				
+				String responseStatus = e.getResponseStatus();
+				if(responseStatus != null && responseStatus.contentEquals("Not Found")){
+					vo.setBaseVO(BaseVO.FAILURE, "Bucket Name 不存在");
+					return vo;
 				}
 			}
 			

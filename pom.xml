@@ -24,7 +24,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 		<dependency>
 		  <groupId>com.xnx3.util</groupId>
 		  <artifactId>xnx3-util</artifactId>
-		  <version>1.0.0</version>
+		  <version>1.1.2</version>
 		</dependency>
 		<dependency>
 		  <groupId>com.xnx3.swing</groupId>

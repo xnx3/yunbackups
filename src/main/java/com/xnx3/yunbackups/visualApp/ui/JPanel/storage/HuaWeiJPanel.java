@@ -6,7 +6,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
 import com.xnx3.BaseVO;
 import com.xnx3.swing.DialogUtil;
 import com.xnx3.yunbackups.core.Global;
@@ -15,8 +14,6 @@ import com.xnx3.yunbackups.core.config.StorageConfig;
 import com.xnx3.yunbackups.core.util.StorateUtil;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.storage.HuaweiyunOBS;
-import com.xnx3.yunbackups.storage.Sftp;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

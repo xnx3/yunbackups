@@ -34,7 +34,7 @@ public class OBSHandler {
 	private String obsBucketName; // 创建的桶的名称
 	private String url; // 访问OBS文件的url
 	
-	private static ObsClient obsClient; // 进行操作的华为云的客户端组件
+	private ObsClient obsClient; // 进行操作的华为云的客户端组件
 	
 	/**
 	 * 创建华为云OBS的本地控制器
