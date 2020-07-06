@@ -6,7 +6,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 
 	<groupId>com.xnx3.yunbackups</groupId>
 	<artifactId>yunbackups.client</artifactId>
-	<version>1.0</version>
+	<version>1.2</version>
 	<packaging>jar</packaging>
 
 	<name>yunbackups</name>
@@ -70,7 +70,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/ma
 					<archive>
 						<manifest>
 							<!-- 主函数的入口 -->
-							<mainClass>com.xnx3.yunbackups.computerDesktopApp.ClientEntry</mainClass>
+							<mainClass>com.xnx3.yunbackups.visualApp.ClientEntry</mainClass>
 							<!-- 打包时 MANIFEST.MF文件不记录的时间戳版本 -->
 							<useUniqueVersions>false</useUniqueVersions>
 							<addClasspath>true</addClasspath>

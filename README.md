@@ -23,3 +23,7 @@ yunbackups 云备份软件，纯Java编写，提供命令行方式、以及可�
 JDK8、Maven3
 1. 本项目为Maven项目，导入你的编辑器
 2. 运行 com.xnx3.yunbackups.visualApp.ClientEntry 
+
+## 打jar包
+执行命令 mvn clean package 打包，target文件夹下生成的 yunbackups.client-xxx.jar 、 lib目录 便是。
+双击 yunbackups.client-xxx.jar 即可运行
