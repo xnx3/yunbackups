@@ -11,7 +11,7 @@ import com.xnx3.swing.DialogUtil;
 import com.xnx3.yunbackups.core.Global;
 import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
 import com.xnx3.yunbackups.core.config.StorageConfig;
-import com.xnx3.yunbackups.core.util.StorateUtil;
+import com.xnx3.yunbackups.core.util.StorageUtil;
 import com.xnx3.yunbackups.core.util.SystemUtil;
 import com.xnx3.yunbackups.storage.HuaweiyunOBS;
 import javax.swing.JButton;
@@ -171,10 +171,10 @@ public class HuaWeiJPanel extends JPanel {
 		setLayout(groupLayout);
 
 		//数据填充，但要考虑数据泄漏危险
-		accessKeyIdTextField.setText(StorateUtil.getStorageConfigValue(Global.storageConfigMap, "accessKeyId"));
-		secretAccessKeyTextField.setText(StorateUtil.getStorageConfigValue(Global.storageConfigMap, "secretAccessKey"));
-		bucketNameTextField.setText(StorateUtil.getStorageConfigValue(Global.storageConfigMap, "bucketName"));
-		endPointTextField.setText(StorateUtil.getStorageConfigValue(Global.storageConfigMap, "endpoint"));
+		accessKeyIdTextField.setText(StorageUtil.getStorageConfigValue(Global.storageConfigMap, "accessKeyId"));
+		secretAccessKeyTextField.setText(StorageUtil.getStorageConfigValue(Global.storageConfigMap, "secretAccessKey"));
+		bucketNameTextField.setText(StorageUtil.getStorageConfigValue(Global.storageConfigMap, "bucketName"));
+		endPointTextField.setText(StorageUtil.getStorageConfigValue(Global.storageConfigMap, "endpoint"));
 	}
 	public JTextField getAccessKeyIdTextField() {
 		return accessKeyIdTextField;

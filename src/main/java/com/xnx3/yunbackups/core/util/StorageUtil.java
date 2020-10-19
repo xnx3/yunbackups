@@ -9,7 +9,7 @@ import com.xnx3.yunbackups.core.Global;
  * @author 管雷鸣
  *
  */
-public class StorateUtil {
+public class StorageUtil {
 	
 	/**
 	 * 从map中，取storage配置文件的名字。如果取不到，返回 "storage_.config"

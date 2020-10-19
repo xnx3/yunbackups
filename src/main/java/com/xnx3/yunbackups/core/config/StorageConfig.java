@@ -3,11 +3,10 @@ package com.xnx3.yunbackups.core.config;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import com.xnx3.FileUtil;
 import com.xnx3.json.JSONUtil;
 import com.xnx3.yunbackups.core.Global;
-import com.xnx3.yunbackups.core.util.StorateUtil;
+import com.xnx3.yunbackups.core.util.StorageUtil;
 
 import net.sf.json.JSONObject;
 
@@ -23,7 +22,7 @@ public class StorageConfig {
 	 */
 	public static void save(Map<String, String> map){
 		JSONObject json = JSONObject.fromObject(map);
-		FileUtil.write(Global.CONFIG_PATH + StorateUtil.getStorageConfigFileName(), json.toString());
+		FileUtil.write(Global.CONFIG_PATH + StorageUtil.getStorageConfigFileName(), json.toString());
 	}
 	
 	/**
@@ -33,7 +32,7 @@ public class StorageConfig {
 	public static Map<String, String> read(){
 		Map<String, String> map = new HashMap<String, String>();
 		
-		String content = FileUtil.read(Global.CONFIG_PATH + StorateUtil.getStorageConfigFileName());
+		String content = FileUtil.read(Global.CONFIG_PATH + StorageUtil.getStorageConfigFileName());
 		if(content == null || content.length() == 0){
 			//第一次用，还没有配置文件
 		}else{

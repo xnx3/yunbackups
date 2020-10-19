@@ -154,7 +154,7 @@ public class BackupsThread extends Thread{
 			}
 			
 			try {
-				Thread.sleep(Global.system.getIntervalTime() * 60 * 1000);
+				Thread.sleep(Global.system.getIntervalTime() * 1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

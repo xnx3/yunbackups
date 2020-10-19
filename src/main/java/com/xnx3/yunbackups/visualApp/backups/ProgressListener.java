@@ -47,7 +47,7 @@ public class ProgressListener implements com.xnx3.yunbackups.core.backups.interf
 		int secend = Math.round(usetime / 1000);
 		//更新完毕的状态提示文字
 		try {
-			Global.logJPanel.statusLabel.setText("本次自动备份完毕！共备份"+alreadyScanAccordNumber+"个文件，耗时"+secend+"秒。下次扫描备份时间为 "+DateUtil.dateFormat(DateUtil.timeForUnix10()+com.xnx3.yunbackups.core.Global.system.getIntervalTime()*60, "hh:mm"));
+			Global.logJPanel.statusLabel.setText("本次自动备份完毕！共备份"+alreadyScanAccordNumber+"个文件，耗时"+secend+"秒。下次扫描备份时间为 "+DateUtil.dateFormat(DateUtil.timeForUnix10()+com.xnx3.yunbackups.core.Global.system.getIntervalTime()*60, "hh:mm:ss"));
 		} catch (NotReturnValueException e) {
 			e.printStackTrace();
 		}

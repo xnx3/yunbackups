@@ -23,9 +23,9 @@ public class BackupsUtil {
 		//判断一下使用的是哪种备份方式
 		if(Global.system.getStorage().equals("sftp")){
 			//判断一下是否设置过备份服务器相关参数，若已经设置了，那么可运行
-			String host = StorateUtil.getStorageConfigValue(Global.storageConfigMap, "host");
-			String username = StorateUtil.getStorageConfigValue(Global.storageConfigMap, "username");
-			String password = StorateUtil.getStorageConfigValue(Global.storageConfigMap, "password");
+			String host = StorageUtil.getStorageConfigValue(Global.storageConfigMap, "host");
+			String username = StorageUtil.getStorageConfigValue(Global.storageConfigMap, "username");
+			String password = StorageUtil.getStorageConfigValue(Global.storageConfigMap, "password");
 			if(host.equals("") || username.equals("") || password.equals("")){
 				return null;
 			}
@@ -35,10 +35,10 @@ public class BackupsUtil {
 			//默认是华为云的，适配之前的版本
 			
 			//判断一下是否设置过备份服务器相关参数，若已经设置了，那么可运行
-			String accessKeyId = StorateUtil.getStorageConfigValue(Global.storageConfigMap, "accessKeyId");
-			String secretAccessKey = StorateUtil.getStorageConfigValue(Global.storageConfigMap, "secretAccessKey");
-			String endpoint = StorateUtil.getStorageConfigValue(Global.storageConfigMap, "endpoint");
-			String bucketName = StorateUtil.getStorageConfigValue(Global.storageConfigMap, "bucketName");
+			String accessKeyId = StorageUtil.getStorageConfigValue(Global.storageConfigMap, "accessKeyId");
+			String secretAccessKey = StorageUtil.getStorageConfigValue(Global.storageConfigMap, "secretAccessKey");
+			String endpoint = StorageUtil.getStorageConfigValue(Global.storageConfigMap, "endpoint");
+			String bucketName = StorageUtil.getStorageConfigValue(Global.storageConfigMap, "bucketName");
 			if(accessKeyId.equals("") || secretAccessKey.equals("") || endpoint.equals("") || bucketName.equals("")){
 				return null;
 			}

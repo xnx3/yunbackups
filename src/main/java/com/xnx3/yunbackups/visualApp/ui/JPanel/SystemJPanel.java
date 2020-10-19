@@ -63,7 +63,7 @@ public class SystemJPanel extends JPanel {
 		intervalTimeTextField.setColumns(10);
 		
 		intervalTimeUnitComboBox = new JComboBox();
-		intervalTimeUnitComboBox.setModel(new DefaultComboBoxModel(new String[] {"分钟", "小时"}));
+		intervalTimeUnitComboBox.setModel(new DefaultComboBoxModel(new String[] {"秒", "分钟", "小时"}));
 		
 		JLabel label = new JLabel("最大文件大小");
 		
@@ -119,13 +119,17 @@ public class SystemJPanel extends JPanel {
 				system.setFileMaxSize(fileMaxSize);
 				
 				String intervalStr = intervalTimeTextField.getText();
-				int intervalTime = Lang.stringToInt(intervalStr, 0);
+				int intervalTime = Lang.stringToInt(intervalStr, -1);
 				if(intervalTime < 0){
 					intervalTime = com.xnx3.yunbackups.core.bean.System.DEFAULT_INTERVALTIME;
 				}else{
 					//判断选择的是分钟，还是小时，如果是小时，那么还要变为分钟
-					if(intervalTimeUnitComboBox.getSelectedItem().toString().equals("小时")){
+					String intervalTimeUnitComboBoxString = intervalTimeUnitComboBox.getSelectedItem().toString();
+					if(intervalTimeUnitComboBoxString.equals("分钟")){
 						intervalTime = intervalTime * 60;
+					}
+					if(intervalTimeUnitComboBoxString.equals("小时")){
+						intervalTime = intervalTime * 60*60;
 					}
 				}
 				system.setIntervalTime(intervalTime);
@@ -291,17 +295,26 @@ public class SystemJPanel extends JPanel {
 		
 		
 		long intervalTime = Global.system.getIntervalTime();
-		//判断一下它的单位，是分钟还是小时
+		//判断一下它的单位，是秒、分钟还是小时
 		if(intervalTime % 60 > 0){
-			//有余数，那单位是分钟
 			intervalTimeUnitComboBox.setSelectedIndex(0);
 			intervalTimeTextField.setText(intervalTime+"");
 		}else{
-			//没有余数，那单位是小时
-			intervalTimeUnitComboBox.setSelectedIndex(1);
-			intervalTimeTextField.setText((intervalTime/60)+"");
+			//没有余数，那单位是分钟或小时
+			
+			//继续判断到底是分钟还是小时
+			long fen = intervalTime/60;
+			
+			if(fen % 60 > 0){
+				//有余数，那么就是分钟了
+				intervalTimeUnitComboBox.setSelectedIndex(1);
+				intervalTimeTextField.setText((intervalTime/60)+"");
+			}else{
+				//没余数，还继续大，就是小时了
+				intervalTimeUnitComboBox.setSelectedIndex(2);
+				intervalTimeTextField.setText((fen/60)+"");
+			}
 		}
-		
 		
 		String suffixStr = "";	//不算多，就不用stringbuffer了
 		for (int i = 0; i < Global.system.getSuffixNameList().size(); i++) {

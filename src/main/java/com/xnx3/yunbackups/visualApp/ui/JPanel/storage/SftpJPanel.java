@@ -6,15 +6,13 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
 import com.xnx3.BaseVO;
 import com.xnx3.swing.DialogUtil;
 import com.xnx3.yunbackups.core.Global;
 import com.xnx3.yunbackups.core.backups.interfaces.StorageInterface;
 import com.xnx3.yunbackups.core.config.StorageConfig;
-import com.xnx3.yunbackups.core.util.StorateUtil;
+import com.xnx3.yunbackups.core.util.StorageUtil;
 import com.xnx3.yunbackups.storage.Sftp;
-
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -170,8 +168,8 @@ public class SftpJPanel extends JPanel {
 		setLayout(groupLayout);
 		
 		//数据填充
-		hostTextField.setText(StorateUtil.getStorageConfigValue(Global.storageConfigMap, "host"));
-		usernameTextField.setText(StorateUtil.getStorageConfigValue(Global.storageConfigMap, "username"));
-		passwordTextField.setText(StorateUtil.getStorageConfigValue(Global.storageConfigMap, "password"));
+		hostTextField.setText(StorageUtil.getStorageConfigValue(Global.storageConfigMap, "host"));
+		usernameTextField.setText(StorageUtil.getStorageConfigValue(Global.storageConfigMap, "username"));
+		passwordTextField.setText(StorageUtil.getStorageConfigValue(Global.storageConfigMap, "password"));
 	}
 }

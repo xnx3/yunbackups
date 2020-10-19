@@ -1,11 +1,7 @@
 package com.xnx3.yunbackups.visualApp.action;
 
-import com.xnx3.yunbackups.commandLineApp.Global;
 import com.xnx3.yunbackups.core.backups.BackupsThread;
 import com.xnx3.yunbackups.core.util.BackupsUtil;
-import com.xnx3.yunbackups.core.util.StorateUtil;
-import com.xnx3.yunbackups.storage.HuaweiyunOBS;
-import com.xnx3.yunbackups.storage.Sftp;
 import com.xnx3.yunbackups.visualApp.backups.ExceptionListener;
 import com.xnx3.yunbackups.visualApp.backups.ProgressListener;
 

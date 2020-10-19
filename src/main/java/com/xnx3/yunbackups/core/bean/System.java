@@ -12,7 +12,7 @@ public class System {
 	public static final int DEFAULT_INTERVALTIME = 60 * 60;	//默认备份时间间隔是1小时
 	public static final int DEFAULT_FILE_MAX_SIZE = 1 * 1024 * 1024 * 10;	//1B * 1024 (kb) * 1024 (mb) * 10 (10mb) ，默认10MB
 	
-	private int intervalTime;	//两次备份的间隔时间,单位是分钟
+	private int intervalTime;	//两次备份的间隔时间,单位是秒（1.2升级到1.3， 单位有分钟变为秒）
 	private List<String> suffixNameList;	//进行备份的后缀名。全小写，格式如 png 、jpg 
 	private List<String> ignoreSuffixNameList;	//忽略的后缀名，在这里面的后缀名，不会进行备份。全小写，格式如 png、 jpg 
 	private long fileMaxSize;	//允许备份的文件最大大小。单位是字节(B)
@@ -20,7 +20,7 @@ public class System {
 	private String storage;		//备份方式，如 sftp 、 huaweiobs
 	
 	public System() {
-		this.intervalTime = 60;	//默认1小时
+		this.intervalTime = 60*60;	//默认1小时
 		this.fileMaxSize = 524288000;	//默认 500MB
 		this.storage = "huaweiobs";	//默认华为obs，兼容1.1版本，不至于升级后，配置丢了
 	}
